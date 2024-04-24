@@ -41,7 +41,7 @@ import { dbType } from '../../config/db.js';
 /**
  * Alias-Typ für gültige Strings bei den Genre eines Film.
  */
-export type Genre = 'AKTION' | 'HORROR';
+export type Genre = 'ACTION' | 'HORROR';
 
 /**
  * Entity-Klasse zu einem relationalen Tabelle
@@ -66,7 +66,7 @@ export class Film {
     readonly bewertung: number | undefined;
 
     @Column('varchar')
-    @ApiProperty({ example: 'AKTION', type: String })
+    @ApiProperty({ example: 'ACTION', type: String })
     readonly genre: Genre | undefined;
 
     @Column('decimal', {

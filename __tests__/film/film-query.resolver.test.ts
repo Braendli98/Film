@@ -384,9 +384,9 @@ describe('GraphQL Queries', () => {
         expect(extensions!.code).toBe('BAD_USER_INPUT');
     });
 
-    test('Filme zum Genre "Aktion"', async () => {
+    test('Filme zum Genre "Action"', async () => {
         // given
-        const filmGenre: FilmGenre = 'Aktion';
+        const filmGenre: FilmGenre = 'Action';
         const body: GraphQLRequest = {
             query: `
                 {

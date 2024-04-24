@@ -58,7 +58,7 @@ const geaenderterFilmInvalid: Record<string, unknown> = {
 
 const veralterFilm: FilmDtoOhneRef = {
     rating: 1,
-    genre: 'Aktion',
+    genre: 'Action',
     preis: 44.4,
     datum: '2022-02-04',
 };

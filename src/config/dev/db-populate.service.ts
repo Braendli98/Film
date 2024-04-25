@@ -1,20 +1,3 @@
-/* eslint-disable @stylistic/quotes */
-/*
- * Copyright (C) 2021 - present Juergen Zimmermann, Florian Goebel, Hochschule Karlsruhe
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PgenreICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */
 
 /**
  * Das Modul enthält die Funktion, um die Test-DB neu zu laden.
@@ -43,7 +26,7 @@ import { resolve } from 'node:path';
  */
 @Injectable()
 export class DbPopulateService implements OnApplicationBootstrap {
-    readonly #tabellen = ['film', 'titel', 'plakat'];
+    readonly #tabellen = ['film', 'titel', 'filmplakat'];
 
     readonly #datasource: DataSource;
 
@@ -103,8 +86,8 @@ export class DbPopulateService implements OnApplicationBootstrap {
         ) titel_external
     `;
 
-    readonly #oracleInsertPlakat = `
-        INSERT INTO plakat(id,beschriftung,content_type,film_id)
+    readonly #oracleInsertFilmPlakat = `
+        INSERT INTO filmplakat(id,beschriftung,content_type,film_id)
         SELECT id,beschriftung,content_type,film_id
         FROM   EXTERNAL (
             (id         NUMBER(10,0),
@@ -117,9 +100,9 @@ export class DbPopulateService implements OnApplicationBootstrap {
                 RECORDS DELIMITED BY NEWLINE
                 SKIP 1
                 FIELDS TERMINATED BY ';')
-            LOCATION ('plakat.csv')
+            LOCATION ('filmplakat.csv')
             REJECT LIMIT UNLIMITED
-        ) plakat_external
+        ) filmplakat_external
     `;
 
     /**
@@ -237,7 +220,7 @@ export class DbPopulateService implements OnApplicationBootstrap {
 
         await this.#oracleInsert(this.#oracleInsertFilm);
         await this.#oracleInsert(this.#oracleInsertTitel);
-        await this.#oracleInsert(this.#oracleInsertPlakat);
+        await this.#oracleInsert(this.#oracleInsertFilmPlakat);
     }
 
     async #populateSQLite() {
@@ -288,4 +271,4 @@ export class DbPopulateService implements OnApplicationBootstrap {
         await this.#datasource.query(singleLine);
     }
 }
-/* eslint-enable @stylistic/quotes */
+

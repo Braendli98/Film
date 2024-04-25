@@ -89,32 +89,15 @@ export interface FilmeModel {
  * den Typ Date nicht gibt.
  */
 export class FilmQuery implements Suchkriterien {
-    @ApiProperty({ required: false })
-    declare readonly isbn: string;
 
     @ApiProperty({ required: false })
-    declare readonly art: Genre;
+    declare readonly genre: Genre;
 
     @ApiProperty({ required: false })
     declare readonly preis: number;
 
     @ApiProperty({ required: false })
-    declare readonly rabatt: number;
-
-    @ApiProperty({ required: false })
-    declare readonly lieferbar: boolean;
-
-    @ApiProperty({ required: false })
     declare readonly datum: string;
-
-    @ApiProperty({ required: false })
-    declare readonly homepage: string;
-
-    @ApiProperty({ required: false })
-    declare readonly javascript: string;
-
-    @ApiProperty({ required: false })
-    declare readonly typescript: string;
 
     @ApiProperty({ required: false })
     declare readonly titel: string;

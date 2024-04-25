@@ -1142,13 +1142,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{rest_url}}?rating=9",
+							"raw": "{{rest_url}}?bewertung=9",
 							"host": [
 								"{{rest_url}}"
 							],
 							"query": [
 								{
-									"key": "rating",
+									"key": "bewertung",
 									"value": "9"
 								}
 							]
@@ -1627,7 +1627,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"isbn\": \"978-0-007-00644-1\",\r\n  \"rating\": 1,\r\n  \"art\": \"KINDLE\",\r\n  \"preis\": 99.99,\r\n  \"rabatt\": 0.123,\r\n  \"lieferbar\": true,\r\n  \"datum\": \"2022-01-31\",\r\n  \"homepage\": \"https://post.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\", \"TYPESCRIPT\"],\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n    \"untertitel\": \"untertitelpost\"\r\n  },\r\n  \"abbildungen\": [{\r\n    \"beschriftung\": \"Abb. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
+							"raw": "{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"ACTION\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Plt. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1661,7 +1661,7 @@
 									"pm.test('Fehlermeldungen im Response Body', () => {\r",
 									"    const body = pm.response.json();\r",
 									"    const { message } = body;\r",
-									"    const props = ['titel.titel', 'isbn', 'rating', 'art', 'preis', 'rabatt', 'datum', 'homepage'];\r",
+									"    const props = ['bewertung', 'genre', 'preis', 'datum'];\r",
 									"    pm.expect(message).to.be.an('array').that.has.a.lengthOf(props.length);\r",
 									"    message.forEach(msg => pm.expect(msg).to.be.a('string').that.includes.oneOf(props));\r",
 									"});"
@@ -1699,7 +1699,7 @@
 					"response": []
 				},
 				{
-					"name": "Neuer film als kunde",
+					"name": "Neuer Film als kunde",
 					"event": [
 						{
 							"listen": "test",
@@ -1797,7 +1797,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"ACTION\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Abb. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
+							"raw": "{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"ACTION\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Plt. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1857,7 +1857,7 @@
 			"name": "Ändern",
 			"item": [
 				{
-					"name": "film 30 ändern",
+					"name": "Film 30 ändern",
 					"event": [
 						{
 							"listen": "test",
@@ -1886,7 +1886,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"ACTION\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Abb. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
+							"raw": "{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"ACTION\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Plt. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1947,7 +1947,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"ACTION\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Abb. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
+							"raw": "{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"ACTION\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Plt. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2008,7 +2008,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"ACTION\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Abb. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
+							"raw": "{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"ACTION\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Plt. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2069,7 +2069,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"ACTION\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Abb. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
+							"raw": "{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"ACTION\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Plt. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2130,7 +2130,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw":"{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"ACTION\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Abb. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
+							"raw":"{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"ACTION\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Plt. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2173,7 +2173,7 @@
 									"pm.test('Fehlermeldungen im Response Body', () => {\r",
 									"    const body = pm.response.json();\r",
 									"    const { message } = body;\r",
-									"    const props = ['isbn', 'rating', 'art', 'preis', 'rabatt', 'datum', 'homepage'];\r",
+									"    const props = ['bewertung', 'genre', 'preis', 'datum'];\r",
 									"    pm.expect(message).to.be.an('array').that.has.a.lengthOf(props.length);\r",
 									"    message.forEach(msg => pm.expect(msg).to.be.a('string').that.includes.oneOf(props));\r",
 									"});"
@@ -2193,7 +2193,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"ACTION\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Abb. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
+							"raw": "{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"ACTION\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Plt. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

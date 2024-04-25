@@ -14,10 +14,10 @@
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 -- https://www.sqlite.org/lang_dropindex.html
-DROP INDEX IF EXISTS plakat_film_id_idx;
+DROP INDEX IF EXISTS filmplakat_film_id_idx;
 -- DROP INDEX IF EXISTS film_isbn_idx;
 
 -- https://www.sqlite.org/lang_droptable.html
-DROP TABLE IF EXISTS plakat;
+DROP TABLE IF EXISTS filmplakat;
 DROP TABLE IF EXISTS titel;
 DROP TABLE IF EXISTS film;

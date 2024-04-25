@@ -66,10 +66,10 @@ CREATE TABLE IF NOT EXISTS titel (
 ) TABLESPACE filmspace;
 
 
-CREATE TABLE IF NOT EXISTS plakat (
+CREATE TABLE IF NOT EXISTS filmplakat (
     id              integer GENERATED ALWAYS AS IDENTITY(START WITH 1000) PRIMARY KEY USING INDEX TABLESPACE filmspace,
     beschriftung    varchar(32) NOT NULL,
     content_type    varchar(16) NOT NULL,
     film_id         integer NOT NULL REFERENCES film
 ) TABLESPACE filmspace;
-CREATE INDEX IF NOT EXISTS plakat_film_id_idx ON plakat(film_id) TABLESPACE filmspace;
+CREATE INDEX IF NOT EXISTS filmplakat_film_id_idx ON filmplakat(film_id) TABLESPACE filmspace;

@@ -14,12 +14,12 @@
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 -- https://docs.oracle.com/en/database/oracle/oracle-database/23/sqlrf/DROP-INDEX.html
-DROP INDEX IF EXISTS plakat_film_id_idx;
+DROP INDEX IF EXISTS filmplakat_film_id_idx;
 DROP INDEX IF EXISTS titel_film_id_idx;
 DROP INDEX IF EXISTS titel_titel_idx;
 -- DROP INDEX IF EXISTS buch_isbn_idx;
 
 -- https://docs.oracle.com/en/database/oracle/oracle-database/23/sqlrf/DROP-TABLE.html
-DROP TABLE IF EXISTS plakat;
+DROP TABLE IF EXISTS filmplakat;
 DROP TABLE IF EXISTS titel;
 DROP TABLE IF EXISTS film;

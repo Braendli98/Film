@@ -1,20 +1,3 @@
-/*
- * Copyright (C) 2016 - present Juergen Zimmermann, Hochschule Karlsruhe
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */
-
 /**
  * Das Modul besteht aus der Klasse {@linkcode QueryBuilder}.
  * @packageDocumentation
@@ -32,7 +15,7 @@ import { typeOrmModuleOptions } from '../../config/typeormOptions.js';
 
 /** Typdefinitionen für die Suche mit der Film-ID. */
 export interface BuildIdParams {
-    /** ID des gesuchten films. */
+    /** ID des gesuchten Films. */
     readonly id: number;
     /** Sollen die Filmplakate mitgeladen werden? */
     readonly mitFilmplakate?: boolean;
@@ -43,33 +26,33 @@ export interface BuildIdParams {
  */
 @Injectable()
 export class QueryBuilder {
-    readonly #filmAlias = `${film.name
+    readonly #filmAlias = `${Film.name
         .charAt(0)
-        .toLowerCase()}${film.name.slice(1)}`;
+        .toLowerCase()}${Film.name.slice(1)}`;
 
-    readonly #titelAlias = `${Titel.titel
+    readonly #titelAlias = `${Titel.name
         .charAt(0)
         .toLowerCase()}${Titel.titel.slice(1)}`;
 
-    readonly #filmplakatAlias = `${Filmplakat.beschriftung
+    readonly #filmplakatAlias = `${Filmplakat.name
         .charAt(0)
-        .toLowerCase()}${Filmplakat.beschriftung.slice(1)}`;
+        .toLowerCase()}${Filmplakat.name.slice(1)}`;
 
     readonly #repo: Repository<Film>;
 
     readonly #logger = getLogger(QueryBuilder.name);
 
-    constructor(@InjectRepository(film) repo: Repository<Film>) {
+    constructor(@InjectRepository(Film) repo: Repository<Film>) {
         this.#repo = repo;
     }
 
     /**
      * Ein Film mit der ID suchen.
-     * @param id ID des gesuchten Filmes
+     * @param id ID des gesuchten Films
      * @returns QueryBuilder
      */
     buildId({ id, mitFilmplakate = false }: BuildIdParams) {
-        // QueryBuilder "film" fuer Repository<film>
+        // QueryBuilder "film" fuer Repository<Film>
         const queryBuilder = this.#repo.createQueryBuilder(this.#filmAlias);
 
         // Fetch-Join: aus QueryBuilder "film" die Property "titel" ->  Tabelle "titel"
@@ -79,9 +62,9 @@ export class QueryBuilder {
         );
 
         if (mitFilmplakate) {
-            // Fetch-Join: aus QueryBuilder "film" die Property "abbildungen" -> Tabelle "abbildung"
+            // Fetch-Join: aus QueryBuilder "film" die Property "filmplakate" -> Tabelle "filmplakat"
             queryBuilder.leftJoinAndSelect(
-                `${this.#filmAlias}.abbildungen`,
+                `${this.#filmAlias}.filmplakate`,
                 this.#filmplakatAlias,
             );
         }
@@ -127,28 +110,6 @@ export class QueryBuilder {
                 `${this.#titelAlias}.titel ${ilike} :titel`,
                 { titel: `%${titel}%` },
             );
-            useWhere = false;
-        }
-
-        if (javascript === 'true') {
-            queryBuilder = useWhere
-                ? queryBuilder.where(
-                      `${this.#filmAlias}.schlagwoerter like '%JAVASCRIPT%'`,
-                  )
-                : queryBuilder.andWhere(
-                      `${this.#filmAlias}.schlagwoerter like '%JAVASCRIPT%'`,
-                  );
-            useWhere = false;
-        }
-
-        if (typescript === 'true') {
-            queryBuilder = useWhere
-                ? queryBuilder.where(
-                      `${this.#filmAlias}.schlagwoerter like '%TYPESCRIPT%'`,
-                  )
-                : queryBuilder.andWhere(
-                      `${this.#filmAlias}.schlagwoerter like '%TYPESCRIPT%'`,
-                  );
             useWhere = false;
         }
 

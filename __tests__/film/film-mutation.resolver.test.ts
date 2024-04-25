@@ -56,7 +56,7 @@ describe('GraphQL Mutations', () => {
                     create(
                         input: {
                             bewertung: 1,
-                            genre: Aktion,
+                            genre: Action,
                             preis: 99.99,
                             datum: "2022-02-28",
                             titel: {

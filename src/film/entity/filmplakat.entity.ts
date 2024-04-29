@@ -5,7 +5,7 @@ import {
     ManyToOne,
     PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Film as Film } from './film.entity.js';
+import { Film } from './film.entity.js';
 
 @Entity()
 export class Filmplakat {
@@ -20,7 +20,7 @@ export class Filmplakat {
     @Column('varchar')
     readonly contentType: string | undefined;
 
-    @ManyToOne(() => Film, (filmguide) => filmguide.filmplakate)
+    @ManyToOne(() => Film, (film) => film.filmplakate)
     @JoinColumn({ name: 'film_id' })
     film: Film | undefined;
 

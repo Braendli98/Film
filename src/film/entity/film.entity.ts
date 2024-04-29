@@ -135,7 +135,7 @@ export class Film {
         JSON.stringify({
             id: this.id,
             version: this.version,
-            rating: this.bewertung,
+            bewertung: this.bewertung,
             genre: this.genre,
             preis: this.preis,
             datum: this.datum,

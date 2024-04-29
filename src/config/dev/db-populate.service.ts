@@ -86,8 +86,7 @@ export class DbPopulateService implements OnApplicationBootstrap {
             REJECT LIMIT UNLIMITED
         ) titel_external
     `;
-
-    readonly #oracleInsertFilmplakat = `
+    readonly #oracleInsertFilmPlakat = `
         INSERT INTO filmplakat(id,beschriftung,content_type,film_id)
         SELECT id,beschriftung,content_type,film_id
         FROM   EXTERNAL (

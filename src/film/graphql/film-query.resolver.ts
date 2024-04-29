@@ -1,8 +1,7 @@
-
-import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { Args, Query, Resolver } from '@nestjs/graphql';
 import { UseFilters, UseInterceptors } from '@nestjs/common';
 import { Film } from '../entity/film.entity.js';
-import { FilmReadService as FilmReadService } from '../service/film-read.service.js';
+import { FilmReadService } from '../service/film-read.service.js';
 import { HttpExceptionFilter } from './http-exception.filter.js';
 import { Public } from 'nest-keycloak-connect';
 import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor.js';
@@ -23,7 +22,7 @@ export interface SuchkriterienInput {
 export class FilmQueryResolver {
     readonly #service: FilmReadService;
 
-    readonly #logger = getLogger(FilmQueryResolver.name); //todo
+    readonly #logger = getLogger(FilmQueryResolver.name);
 
     constructor(service: FilmReadService) {
         this.#service = service;

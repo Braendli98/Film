@@ -1,13 +1,12 @@
-
 // eslint-disable-next-line max-classes-per-file
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { AuthGuard, Roles } from 'nest-keycloak-connect';
 import { IsInt, IsNumberString, Min } from 'class-validator';
 import { UseFilters, UseGuards, UseInterceptors } from '@nestjs/common';
+import { type Film } from '../entity/film.entity.js';
+import { FilmDTO } from '../rest/filmDTO.entity.js';
+import { FilmWriteService } from '../service/film-write.service.js';
 import { type Filmplakat } from '../entity/filmplakat.entity.js';
-import { type Film as Film } from '../entity/film.entity.js';
-import { FilmDTO as FilmDTO } from '../rest/filmDTO.entity.js';
-import { FilmWriteService as FilmWriteService } from '../service/film-write.service.js';
 import { HttpExceptionFilter } from './http-exception.filter.js';
 import { type IdInput } from './film-query.resolver.js';
 import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor.js';
@@ -77,7 +76,7 @@ export class FilmMutationResolver {
 
         const versionResult = await this.#service.update({
             id: Number.parseInt(filmDTO.id, 10),
-            film: film,
+            film,
             version: versionStr,
         });
         // TODO BadUserInputError
@@ -101,7 +100,7 @@ export class FilmMutationResolver {
         const titel: Titel = {
             id: undefined,
             titel: titelDTO.titel,
-            beschreibung: titelDTO.untertitel,
+            beschreibung: titelDTO.beschreibung,
             film: undefined,
         };
         const filmplakate = filmDTO.filmplakate?.map((filmplakatDTO) => {

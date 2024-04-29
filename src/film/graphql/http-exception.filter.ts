@@ -1,4 +1,3 @@
-
 /**
  * Das Modul besteht aus der Klasse {@linkcode HttpExceptionFilter}.
  * @packageDocumentation

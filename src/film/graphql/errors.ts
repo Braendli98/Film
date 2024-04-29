@@ -1,4 +1,3 @@
-
 /**
  * Das Modul besteht aus den Klassen für die Fehlerbehandlung bei GraphQL.
  * @packageDocumentation

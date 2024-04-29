@@ -27,7 +27,7 @@ import { MaxLength } from 'class-validator';
 /**
  * Entity-Klasse für Abbildung ohne TypeORM.
  */
-export class FilmPlakatDTO {
+export class FilmplakatDTO {
     @MaxLength(32)
     @ApiProperty({ example: 'Die Beschriftung', type: String })
     readonly beschriftung!: string;

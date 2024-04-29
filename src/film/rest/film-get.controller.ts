@@ -14,7 +14,6 @@ import {
     ApiResponse,
     ApiTags,
 } from '@nestjs/swagger';
-import { type Film, type Genre } from '../entity/film.entity.js';
 import {
     Controller,
     Get,
@@ -27,8 +26,9 @@ import {
     Res,
     UseInterceptors,
 } from '@nestjs/common';
+import { type Film, type Genre } from '../entity/film.entity.js';
 import { Request, Response } from 'express';
-import { FilmReadService as FilmReadService } from '../service/film-read.service.js';
+import { FilmReadService } from '../service/film-read.service.js';
 import { Public } from 'nest-keycloak-connect';
 import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor.js';
 import { type Suchkriterien } from '../service/suchkriterien.js';
@@ -89,6 +89,8 @@ export interface FilmeModel {
  * den Typ Date nicht gibt.
  */
 export class FilmQuery implements Suchkriterien {
+    @ApiProperty({ required: false })
+    declare readonly bewertung: number;
 
     @ApiProperty({ required: false })
     declare readonly genre: Genre;
@@ -98,6 +100,12 @@ export class FilmQuery implements Suchkriterien {
 
     @ApiProperty({ required: false })
     declare readonly datum: string;
+
+    @ApiProperty({ required: false })
+    declare readonly javascript: string;
+
+    @ApiProperty({ required: false })
+    declare readonly typescript: string;
 
     @ApiProperty({ required: false })
     declare readonly titel: string;
@@ -244,9 +252,7 @@ export class FilmGetController {
         this.#logger.debug('get: %o', filme);
 
         // HATEOAS: Atom Links je Film
-        const filmeModel = filme.map((film) =>
-            this.#toModel(film, req, false),
-        );
+        const filmeModel = filme.map((film) => this.#toModel(film, req, false));
         this.#logger.debug('get: filmeModel=%o', filmeModel);
 
         const result: FilmeModel = { _embedded: { filme: filmeModel } };
@@ -284,4 +290,3 @@ export class FilmGetController {
         return filmModel;
     }
 }
-/* eslint-enable max-lines */

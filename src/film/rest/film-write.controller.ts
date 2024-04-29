@@ -1,5 +1,3 @@
-
-
 /**
  * Das Modul besteht aus der Controller-Klasse für Schreiben an der REST-Schnittstelle.
  * @packageDocumentation
@@ -33,11 +31,11 @@ import {
     UseGuards,
     UseInterceptors,
 } from '@nestjs/common';
-import { FilmDTO, BuchDtoOhneRef as FilmDtoOhneRef } from './filmDTO.entity.js';
+import { FilmDTO, FilmDtoOhneRef } from './filmDTO.entity.js';
 import { Request, Response } from 'express';
+import { type Film } from '../entity/film.entity.js';
+import { FilmWriteService } from '../service/film-write.service.js';
 import { type Filmplakat } from '../entity/filmplakat.entity.js';
-import { type Buch as Film } from '../entity/buch.entity.js';
-import { BuchWriteService as FilmWriteService } from '../service/film-write.service.js';
 import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor.js';
 import { type Titel } from '../entity/titel.entity.js';
 import { getBaseUri } from './getBaseUri.js';
@@ -53,10 +51,10 @@ const MSG_FORBIDDEN = 'Kein Token mit ausreichender Berechtigung vorhanden';
 @UseInterceptors(ResponseTimeInterceptor)
 @ApiTags('Film REST-API')
 @ApiBearerAuth()
-export class FilmguideWriteController {
+export class FilmWriteController {
     readonly #service: FilmWriteService;
 
-    readonly #logger = getLogger(FilmguideWriteController.name);
+    readonly #logger = getLogger(FilmWriteController.name);
 
     constructor(service: FilmWriteService) {
         this.#service = service;
@@ -169,7 +167,7 @@ export class FilmguideWriteController {
         }
 
         const film = this.#filmDtoOhneRefToFilm(filmDTO);
-        const neueVersion = await this.#service.update({ id, film: film, version });
+        const neueVersion = await this.#service.update({ id, film, version });
         this.#logger.debug('put: version=%d', neueVersion);
         return res.header('ETag', `"${neueVersion}"`).send();
     }
@@ -201,7 +199,7 @@ export class FilmguideWriteController {
             titel: titelDTO.titel,
             beschreibung: titelDTO.beschreibung,
             film: undefined,
-        }; //todo
+        };
         const filmplakate = filmDTO.filmplakate?.map((filmplakatDTO) => {
             const filmplakat: Filmplakat = {
                 id: undefined,

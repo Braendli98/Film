@@ -1,4 +1,3 @@
-
 /**
  * Das Modul besteht aus der Klasse {@linkcode FilmWriteService} für die
  * Schreiboperationen im Anwendungskern.
@@ -6,14 +5,16 @@
  */
 
 import { type DeleteResult, Repository } from 'typeorm';
-import { Injectable, NotFoundException } from '@nestjs/common';
 import {
+    IdExistsException,
     VersionInvalidException,
     VersionOutdatedException,
 } from './exceptions.js';
-import { FilmPlakat } from '../entity/filmplakat.entity.js';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Film } from '../entity/film.entity.js';
 import { FilmReadService } from './film-read.service.js';
+import { Filmplakat } from '../entity/filmplakat.entity.js';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MailService } from '../../mail/mail.service.js';
 import { Titel } from '../entity/titel.entity.js';
@@ -59,6 +60,7 @@ export class FilmWriteService {
      * Ein neues Film soll angelegt werden.
      * @param Film Das neu abzulegende Film
      * @returns Die ID des neu angelegten Films
+     * @throws IdExists falls die ISBN-Nummer bereits existiert
      */
     async create(film: Film): Promise<number> {
         this.#logger.debug('create: film=%o', film);
@@ -119,7 +121,7 @@ export class FilmWriteService {
         this.#logger.debug('delete: id=%d', id);
         const film = await this.#readService.findById({
             id,
-            mitFilmPlakate: true,
+            mitFilmplakate: true,
         });
 
         let deleteResult: DeleteResult | undefined;
@@ -147,12 +149,12 @@ export class FilmWriteService {
         );
     }
 
-    // async #validateCreate({ isbn }: Film): Promise<undefined> {
-    //     this.#logger.debug('#validateCreate: isbn=%s', isbn);
-    //     if (await this.#repo.existsBy({ isbn })) {
-    //         throw new IsbnExistsException(isbn);
-    //     }
-    // }
+    async #validateCreate({ id }: Film): Promise<undefined> {
+        this.#logger.debug('#validateCreate: id=%s', id);
+        if (await this.#repo.existsBy({ id })) {
+            throw new IdExistsException(id);
+        }
+    }
 
     async #sendmail(film: Film) {
         const subject = `Neues Film ${film.id}`;

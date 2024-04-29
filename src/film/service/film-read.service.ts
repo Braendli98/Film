@@ -4,7 +4,7 @@
  */
 
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { film } from '../entity/film.entity.js';
+import { Film } from '../entity/film.entity.js';
 import { QueryBuilder } from './query-builder.js';
 import { type Suchkriterien } from './suchkriterien.js';
 import { getLogger } from '../../logger/logger.js';

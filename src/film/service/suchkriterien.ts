@@ -3,14 +3,14 @@
  * @packageDocumentation
  */
 
-import { type FilmGenre } from './../entity/film.entity.js';
+import { type Genre } from './../entity/film.entity.js';
 
 /**
  * Typdefinition für `FilmReadService.find()`und `QueryBuilder.build()`
  */
 export interface Suchkriterien {
     readonly bewertung?: number;
-    readonly genre?: FilmGenre;
+    readonly genre?: Genre;
     readonly preis?: number;
     readonly datum?: string;
     readonly javascript?: string;

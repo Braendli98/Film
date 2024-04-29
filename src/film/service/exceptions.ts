@@ -1,4 +1,23 @@
+/* eslint-disable max-classes-per-file */
 import { HttpException, HttpStatus } from '@nestjs/common';
+
+/**
+ * Das Modul besteht aus den Klassen für die Fehlerbehandlung bei der Verwaltung
+ * von Büchern, z.B. beim DB-Zugriff.
+ * @packageDocumentation
+ */
+
+/**
+ * Exception-Klasse für eine bereits existierende Id-ummer.
+ */
+export class IdExistsException extends HttpException {
+    constructor(readonly id: number | undefined) {
+        super(
+            `Die ISBN-Nummer ${id} existiert bereits.`,
+            HttpStatus.UNPROCESSABLE_ENTITY,
+        );
+    }
+}
 
 /**
  * Exception-Klasse für eine ungültige Versionsnummer beim Ändern.

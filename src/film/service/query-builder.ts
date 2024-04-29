@@ -3,8 +3,8 @@
  * @packageDocumentation
  */
 
+import { Film } from '../entity/film.entity.js';
 import { Filmplakat } from '../entity/filmplakat.entity.js';
-import { film } from '../entity/film.entity.js';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
@@ -32,7 +32,7 @@ export class QueryBuilder {
 
     readonly #titelAlias = `${Titel.name
         .charAt(0)
-        .toLowerCase()}${Titel.titel.slice(1)}`;
+        .toLowerCase()}${Titel.name.slice(1)}`;
 
     readonly #filmplakatAlias = `${Filmplakat.name
         .charAt(0)
@@ -80,7 +80,6 @@ export class QueryBuilder {
      */
     // z.B. { titel: 'a', rating: 5, javascript: true }
     // "rest properties" fuer anfaengliche WHERE-Klausel: ab ES 2018 https://github.com/tc39/proposal-object-rest-spread
-    // eslint-disable-next-line max-lines-per-function
     build({ titel, javascript, typescript, ...props }: Suchkriterien) {
         this.#logger.debug(
             'build: titel=%s, javascript=%s, typescript=%s, props=%o',

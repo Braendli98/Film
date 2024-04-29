@@ -1,4 +1,5 @@
-
+/* eslint-disable @eslint-community/eslint-comments/disable-enable-pair */
+/* eslint-disable @stylistic/quotes */
 /**
  * Das Modul enthält die Funktion, um die Test-DB neu zu laden.
  * @packageDocumentation
@@ -85,7 +86,6 @@ export class DbPopulateService implements OnApplicationBootstrap {
             REJECT LIMIT UNLIMITED
         ) titel_external
     `;
-
     readonly #oracleInsertFilmPlakat = `
         INSERT INTO filmplakat(id,beschriftung,content_type,film_id)
         SELECT id,beschriftung,content_type,film_id
@@ -220,7 +220,7 @@ export class DbPopulateService implements OnApplicationBootstrap {
 
         await this.#oracleInsert(this.#oracleInsertFilm);
         await this.#oracleInsert(this.#oracleInsertTitel);
-        await this.#oracleInsert(this.#oracleInsertFilmPlakat);
+        await this.#oracleInsert(this.#oracleInsertFilmplakat);
     }
 
     async #populateSQLite() {
@@ -271,4 +271,3 @@ export class DbPopulateService implements OnApplicationBootstrap {
         await this.#datasource.query(singleLine);
     }
 }
-

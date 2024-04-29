@@ -1,4 +1,3 @@
-
 import { DbPopulateService } from './db-populate.service.js';
 import { DevController } from './dev.controller.js';
 import { Film } from '../../film/entity/film.entity.js';

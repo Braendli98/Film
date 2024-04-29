@@ -47,7 +47,7 @@ type Titel {
 }
 
 "Daten zum Titel eines Filmes"
-type Plakat {
+type FilmPlakat {
   beschriftung: String!
   contentType: String
 }
@@ -86,8 +86,8 @@ input TitelInput {
   untertitel: String
 }
 
-"Daten zu den Plakat eines Filmes"
-input PlakatInput {
+"Daten zu den FilmPlakat eines Filmes"
+input FilmPlakatInput {
   beschriftung: String!
   contentType: String!
 }
@@ -99,7 +99,7 @@ input FilmInput {
   preis: Float
   datum: String
   titel: TitelInput!
-  aplakate: [PlakatInput!]
+  afilmplakate: [FilmPlakatInput!]
 }
 
 type CreatePayload {

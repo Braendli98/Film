@@ -44,10 +44,10 @@ CREATE TABLE IF NOT EXISTS titel (
 );
 
 
-CREATE TABLE IF NOT EXISTS plakat (
+CREATE TABLE IF NOT EXISTS filmplakat (
     id              INTEGER PRIMARY KEY AUTOINCREMENT,
     beschriftung    TEXT NOT NULL,
     content_type    TEXT NOT NULL,
     film_id         INTEGER NOT NULL REFERENCES film
 );
-CREATE INDEX IF NOT EXISTS plakat_film_id_idx ON plakat(film_id);
+CREATE INDEX IF NOT EXISTS filmplakat_film_id_idx ON filmplakat(film_id);

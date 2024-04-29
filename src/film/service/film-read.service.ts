@@ -1,27 +1,10 @@
-/*
- * Copyright (C) 2016 - present Juergen Zimmermann, Hochschule Karlsruhe
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */
-
 /**
  * Das Modul besteht aus der Klasse {@linkcode FilmReadService}.
  * @packageDocumentation
  */
 
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { film } from '../entity/film.entity.js';
+import { Film } from '../entity/film.entity.js';
 import { QueryBuilder } from './query-builder.js';
 import { type Suchkriterien } from './suchkriterien.js';
 import { getLogger } from '../../logger/logger.js';
@@ -32,8 +15,8 @@ import { getLogger } from '../../logger/logger.js';
 export interface FindByIdParams {
     /** ID des gesuchten Films */
     readonly id: number;
-    /** Sollen die Abbildungen mitgeladen werden? */
-    readonly mitAbbildungen?: boolean;
+    /** Sollen die Filmplakate mitgeladen werden? */
+    readonly mitFilmplakate?: boolean;
 }
 
 /**
@@ -76,20 +59,17 @@ export class FilmReadService {
      * @throws NotFoundException falls kein Film mit der ID existiert
      */
     // https://2ality.com/2015/01/es6-destructuring.html#simulating-named-parameters-in-javascript
-    async findById({ id, mitAbbildungen = false }: FindByIdParams) {
+    async findById({ id, mitFilmplakate = false }: FindByIdParams) {
         this.#logger.debug('findById: id=%d', id);
 
         // https://typeorm.io/working-with-repository
         // Das Resultat ist undefined, falls kein Datensatz gefunden
         // Lesen: Keine Transaktion erforderlich
         const film = await this.#queryBuilder
-            .buildId({ id, mitAbbildungen })
+            .buildId({ id, mitFilmplakate })
             .getOne();
         if (film === null) {
             throw new NotFoundException(`Es gibt kein Film mit der ID ${id}.`);
-        }
-        if (film.schlagwoerter === null) {
-            film.schlagwoerter = [];
         }
 
         if (this.#logger.isLevelEnabled('debug')) {
@@ -98,10 +78,10 @@ export class FilmReadService {
                 film.toString(),
                 film.titel,
             );
-            if (mitAbbildungen) {
+            if (mitFilmplakate) {
                 this.#logger.debug(
-                    'findById: abbildungen=%o',
-                    film.abbildungen,
+                    'findById: filmplakate=%o',
+                    film.filmplakate,
                 );
             }
         }
@@ -141,17 +121,12 @@ export class FilmReadService {
                 `Keine Filme gefunden: ${JSON.stringify(suchkriterien)}`,
             );
         }
-        filme.forEach((film) => {
-            if (film.schlagwoerter === null) {
-                film.schlagwoerter = [];
-            }
-        });
         this.#logger.debug('find: filme=%o', filme);
         return filme;
     }
 
     #checkKeys(keys: string[]) {
-        // Ist jedes Suchkriterium auch eine Property von Film oder "schlagwoerter"?
+        // Ist jedes Suchkriterium auch eine Property von Film?
         let validKeys = true;
         keys.forEach((key) => {
             if (

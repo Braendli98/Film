@@ -1,3 +1,5 @@
+/* eslint-disable @eslint-community/eslint-comments/disable-enable-pair */
+/* eslint-disable @stylistic/quotes */
 /**
  * Das Modul enthält die Funktion, um die Test-DB neu zu laden.
  * @packageDocumentation

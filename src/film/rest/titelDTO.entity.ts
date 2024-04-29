@@ -38,4 +38,4 @@ export class TitelDTO {
     @ApiProperty({ example: 'Die Beschreibung', type: String })
     readonly beschreibung: string | undefined;
 }
-/* eslint-enable @typescript-eslint/no-magic-numbers */
+

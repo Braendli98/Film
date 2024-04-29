@@ -33,7 +33,7 @@ import {
     ValidateNested,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { type FilmGenre } from '../entity/film.entity.js';
+import { type Genre } from '../entity/film.entity.js';
 import { FilmPlakatDTO } from './filmplakatDTO.entity.js';
 import { TitelDTO } from './titelDTO.entity.js';
 import { Type } from 'class-transformer';
@@ -50,10 +50,11 @@ export class FilmDtoOhneRef {
     @ApiProperty({ example: 5, type: Number })
     readonly bewertung: number | undefined;
 
-    @Matches(/^DRUCKAUSGABE$|^KINDLE$/u)
+    // hier was verändert
+    @Matches(/^ACTION$|^HORROR$/u)
     @IsOptional()
-    @ApiProperty({ example: 'DRUCKAUSGABE', type: String })
-    readonly genre: FilmGenre | undefined;
+    @ApiProperty({ example: 'ACTION', type: String })
+    readonly genre: Genre | undefined;
 
     @IsPositive()
     @ApiProperty({ example: 1, type: Number })
@@ -79,7 +80,7 @@ export class FilmDTO extends FilmDtoOhneRef {
     @IsArray()
     @ValidateNested({ each: true })
     @Type(() => FilmPlakatDTO)
-    @ApiProperty({ type: [PlakatDTO] })
+    @ApiProperty({ type: [FilmPlakatDTO] })
     readonly filmplakate: FilmPlakatDTO[] | undefined;
 
     // PlakatDTO

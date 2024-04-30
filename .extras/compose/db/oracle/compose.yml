@@ -22,7 +22,7 @@ services:
         target: /sql
         read_only: true
       - type: bind
-        source: C:/Zimmermann/volumes/oracle/csv/buch
+        source: C:/Zimmermann/volumes/oracle/csv/film
         target: /csv
     env_file: .env
     # user: oracle:oinstall

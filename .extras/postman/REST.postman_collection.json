@@ -720,7 +720,7 @@
 					"response": []
 				},
 				{
-					"name": "Filmgenre ACTION",
+					"name": "Filmgenre Action",
 					"event": [
 						{
 							"listen": "test",
@@ -854,14 +854,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{rest_url}}?genre=ACTION",
+							"raw": "{{rest_url}}?genre=Action",
 							"host": [
 								"{{rest_url}}"
 							],
 							"query": [
 								{
 									"key": "genre",
-									"value": "ACTION"
+									"value": "Action"
 								}
 							]
 						}
@@ -1627,7 +1627,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"ACTION\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Plt. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
+							"raw": "{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"Action\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Plt. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1797,7 +1797,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"ACTION\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Plt. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
+							"raw": "{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"Action\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Plt. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1886,7 +1886,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"ACTION\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Plt. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
+							"raw": "{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"Action\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Plt. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1947,7 +1947,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"ACTION\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Plt. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
+							"raw": "{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"Action\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Plt. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2008,7 +2008,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"ACTION\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Plt. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
+							"raw": "{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"Action\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Plt. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2069,7 +2069,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"ACTION\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Plt. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
+							"raw": "{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"Action\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Plt. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2130,7 +2130,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw":"{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"ACTION\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Plt. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
+							"raw":"{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"Action\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Plt. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2193,7 +2193,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"ACTION\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Plt. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
+							"raw": "{\r\n  \"bewertung\": 1,\r\n  \"genre\": \"Action\",\r\n  \"preis\": 99.99,\r\n  \"datum\": \"2022-01-31\",\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n  \"filmplakate\": [{\r\n    \"beschriftung\": \"Plt. 1\",\r\n    \"contentType\": \"img/png\"\r\n  }]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

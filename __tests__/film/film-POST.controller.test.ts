@@ -42,7 +42,7 @@ const neuerFilmInvalid: Record<string, unknown> = {
         beschreibung: 'Beschreibunginvalid',
     },
 };
-// const neuesFilmIsbnExistiert: BuchDTO = {
+// const neuesFilmIsbnExistiert: FilmDTO = {
 //     isbn: '978-3-897-22583-1',
 //     rating: 1,
 //     art: 'DRUCKAUSGABE',
@@ -159,7 +159,7 @@ describe('POST /rest', () => {
     // //     // when
     // //     const response: AxiosResponse<ErrorResponse> = await client.post(
     // //         '/rest',
-    // //         neuesBuchIsbnExistiert,
+    // //         neuesFilmIsbnExistiert,
     // //         { headers },
     // //     );
 

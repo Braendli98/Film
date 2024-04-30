@@ -21,17 +21,17 @@
 -- "Software Pioneers"
 
 INSERT INTO film(id, version, bewertung, genre, preis, datum, erzeugt, aktualisiert) VALUES
-    (1,0,4,'HORROR',11.1,'2022-02-01','2022-02-01 00:00:00','2022-02-01 00:00:00');
+    (1,0,4,'Horror',11.1,'2022-02-01','2022-02-01 00:00:00','2022-02-01 00:00:00');
 INSERT INTO film(id, version, bewertung, genre, preis, datum, erzeugt, aktualisiert) VALUES
-    (20,0,2,'ACTION',22.2,'2022-02-02','2022-02-02 00:00:00','2022-02-02 00:00:00');
+    (20,0,2,'Action',22.2,'2022-02-02','2022-02-02 00:00:00','2022-02-02 00:00:00');
 INSERT INTO film(id, version, bewertung, genre, preis, datum, erzeugt, aktualisiert) VALUES
-    (30,0,3,'HORROR',33.3,'2022-02-03','2022-02-03 00:00:00','2022-02-03 00:00:00');
+    (30,0,3,'Horror',33.3,'2022-02-03','2022-02-03 00:00:00','2022-02-03 00:00:00');
 INSERT INTO film(id, version, bewertung, genre, preis, datum, erzeugt, aktualisiert) VALUES
-    (40,0,4,'HORROR',44.4,'2022-02-04','2022-02-04 00:00:00','2022-02-04 00:00:00');
+    (40,0,4,'Horror',44.4,'2022-02-04','2022-02-04 00:00:00','2022-02-04 00:00:00');
 INSERT INTO film(id, version, bewertung, genre, preis, datum, erzeugt, aktualisiert) VALUES
-    (50,0,2,'ACTION',55.5,'2022-02-05','2022-02-05 00:00:00','2022-02-05 00:00:00');
+    (50,0,2,'Action',55.5,'2022-02-05','2022-02-05 00:00:00','2022-02-05 00:00:00');
 INSERT INTO film(id, version, bewertung, genre, preis, datum, erzeugt, aktualisiert) VALUES
-    (60,0,1,'ACTION',66.6,'2022-02-06','2022-02-06 00:00:00','2022-02-06 00:00:00');
+    (60,0,1,'Action',66.6,'2022-02-06','2022-02-06 00:00:00','2022-02-06 00:00:00');
 
 INSERT INTO titel(id, titel, beschreibung, film_id) VALUES
     (1,'Alpha','alpha',1);

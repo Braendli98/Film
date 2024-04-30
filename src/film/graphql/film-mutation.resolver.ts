@@ -145,7 +145,7 @@ export class FilmMutationResolver {
         };
     }
 
-    // #errorMsgCreateBuch(err: CreateError) {
+    // #errorMsgCreateFilm(err: CreateError) {
     //     switch (err.type) {
     //         case 'IsbnExists': {
     //             return `Die ISBN ${err.isbn} existiert bereits`;
@@ -156,10 +156,10 @@ export class FilmMutationResolver {
     //     }
     // }
 
-    // #errorMsgUpdateBuch(err: UpdateError) {
+    // #errorMsgUpdateFilm(err: UpdateError) {
     //     switch (err.type) {
-    //         case 'BuchNotExists': {
-    //             return `Es gibt kein Buch mit der ID ${err.id}`;
+    //         case 'FilmNotExists': {
+    //             return `Es gibt kein Film mit der ID ${err.id}`;
     //         }
     //         case 'VersionInvalid': {
     //             return `"${err.version}" ist keine gueltige Versionsnummer`;

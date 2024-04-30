@@ -262,7 +262,7 @@ describe('GraphQL Queries', () => {
     //     const body: GraphQLRequest = {
     //         query: `
     //             {
-    //                 buecher(suchkriterien: {
+    //                 filme(suchkriterien: {
     //                     isbn: "${isbnVorhanden}"
     //                 }) {
     //                     isbn
@@ -285,16 +285,16 @@ describe('GraphQL Queries', () => {
 
     //     expect(data.data).toBeDefined();
 
-    //     const { buecher } = data.data!;
+    //     const { filme } = data.data!;
 
-    //     expect(buecher).not.toHaveLength(0);
+    //     expect(filme).not.toHaveLength(0);
 
-    //     const buecherArray: BuchDTO[] = buecher;
+    //     const filmeArray: FilmDTO[] = filme;
 
-    //     expect(buecherArray).toHaveLength(1);
+    //     expect(filmeArray).toHaveLength(1);
 
-    //     const [buch] = buecherArray;
-    //     const { isbn, titel } = buch!;
+    //     const [film] = filmeArray;
+    //     const { isbn, titel } = film!;
 
     //     expect(isbn).toBe(isbnVorhanden);
     //     expect(titel?.titel).toBeDefined();
@@ -469,7 +469,7 @@ describe('GraphQL Queries', () => {
     //     const body: GraphQLRequest = {
     //         query: `
     //             {
-    //                 buecher(suchkriterien: {
+    //                 filme(suchkriterien: {
     //                     lieferbar: true
     //                 }) {
     //                     lieferbar
@@ -492,14 +492,14 @@ describe('GraphQL Queries', () => {
 
     //     expect(data.data).toBeDefined();
 
-    //     const { buecher } = data.data!;
+    //     const { filme } = data.data!;
 
-    //     expect(buecher).not.toHaveLength(0);
+    //     expect(filme).not.toHaveLength(0);
 
-    //     const buecherArray: BuchDTO[] = buecher;
+    //     const filmeArray: FilmDTO[] = filme;
 
-    //     buecherArray.forEach((buch) => {
-    //         const { lieferbar, titel } = buch;
+    //     filmeArray.forEach((film) => {
+    //         const { lieferbar, titel } = film;
 
     //         expect(lieferbar).toBe(true);
     //         expect(titel?.titel).toBeDefined();

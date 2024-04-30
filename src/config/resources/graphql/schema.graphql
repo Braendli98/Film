@@ -69,7 +69,7 @@ type Film {
 "Enum-Typ für die Art eines Filmes"
 enum Genre {
   KOMOEDIE
-  ACTION
+  Action
   FANTASY
 }
 

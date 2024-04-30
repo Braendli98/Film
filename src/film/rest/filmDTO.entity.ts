@@ -34,9 +34,9 @@ export class FilmDtoOhneRef {
     readonly bewertung: number | undefined;
 
     // hier was verändert
-    @Matches(/^ACTION$|^HORROR$/u)
+    @Matches(/^Action$|^Horror$/u)
     @IsOptional()
-    @ApiProperty({ example: 'ACTION', type: String })
+    @ApiProperty({ example: 'Action', type: String })
     readonly genre: Genre | undefined;
 
     @IsPositive()

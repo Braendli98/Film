@@ -1,4 +1,3 @@
-
 /**
  * Das Modul besteht aus der Controller-Klasse für die Authentifizierung an der
  * REST-Schnittstelle.

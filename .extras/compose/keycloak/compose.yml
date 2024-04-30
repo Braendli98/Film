@@ -1,5 +1,4 @@
 
-
 # Aufruf:   docker compose up
 #           docker compose exec keycloak bash
 #             ls /opt/keycloak/data

@@ -14,7 +14,6 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Film } from '../entity/film.entity.js';
 import { FilmReadService } from './film-read.service.js';
 import { Filmplakat } from '../entity/filmplakat.entity.js';
-import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MailService } from '../../mail/mail.service.js';
 import { Titel } from '../entity/titel.entity.js';
@@ -135,7 +134,7 @@ export class FilmWriteService {
             }
             const filmplakate = film.filmplakate ?? [];
             for (const filmplakat of filmplakate) {
-                await transactionalMgr.delete(FilmPlakat, filmplakat.id);
+                await transactionalMgr.delete(Filmplakat, filmplakat.id);
             }
 
             deleteResult = await transactionalMgr.delete(Film, id);

@@ -1,4 +1,3 @@
-
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { BadUserInputError } from '../../film/graphql/errors.js';
 import { KeycloakService } from './keycloak.service.js';

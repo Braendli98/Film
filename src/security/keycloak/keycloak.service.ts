@@ -1,4 +1,4 @@
-
+/* eslint-disable camelcase, @typescript-eslint/naming-convention */
 import {
     type KeycloakConnectOptions,
     type KeycloakConnectOptionsFactory,

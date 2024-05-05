@@ -25,7 +25,7 @@ const neuerFilm: FilmDTO = {
         titel: 'Titelpost',
         beschreibung: 'beschreibungpos',
     },
-    filmplakte: [
+    filmplakate: [
         {
             beschriftung: 'Abb. 1',
             contentType: 'img/png',
@@ -33,7 +33,7 @@ const neuerFilm: FilmDTO = {
     ],
 };
 const neuerFilmInvalid: Record<string, unknown> = {
-    rating: -1,
+    bewertung: -1,
     genre: 'UNSICHTBAR',
     preis: -1,
     datum: '12345-123-123',

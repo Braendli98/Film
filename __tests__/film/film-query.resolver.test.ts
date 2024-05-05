@@ -2,7 +2,7 @@
 /* eslint-disable max-lines */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
-import { type Film, type FilmGenre } from '../../src/film/entity/film.entity.js';
+import { type Film, type Genre } from '../../src/film/entity/film.entity.js';
 import { afterAll, beforeAll, describe, expect, test } from '@jest/globals';
 import axios, { type AxiosInstance, type AxiosResponse } from 'axios';
 import {
@@ -386,7 +386,7 @@ describe('GraphQL Queries', () => {
 
     test('Filme zum Genre "Action"', async () => {
         // given
-        const filmGenre: FilmGenre = 'Action';
+        const filmGenre: Genre = 'Action';
         const body: GraphQLRequest = {
             query: `
                 {

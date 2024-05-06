@@ -257,49 +257,6 @@ describe('GraphQL Queries', () => {
         expect(extensions!.code).toBe('BAD_USER_INPUT');
     });
 
-    // test('Film zu vorhandener ISBN-Nummer', async () => {
-    //     // given
-    //     const body: GraphQLRequest = {
-    //         query: `
-    //             {
-    //                 filme(suchkriterien: {
-    //                     isbn: "${isbnVorhanden}"
-    //                 }) {
-    //                     isbn
-    //                     titel {
-    //                         titel
-    //                     }
-    //                 }
-    //             }
-    //         `,
-    //     };
-
-    //     // when
-    //     const { status, headers, data }: AxiosResponse<GraphQLResponseBody> =
-    //         await client.post(graphqlPath, body);
-
-    //     // then
-    //     expect(status).toBe(HttpStatus.OK);
-    //     expect(headers['content-type']).toMatch(/json/iu);
-    //     expect(data.errors).toBeUndefined();
-
-    //     expect(data.data).toBeDefined();
-
-    //     const { filme } = data.data!;
-
-    //     expect(filme).not.toHaveLength(0);
-
-    //     const filmeArray: FilmDTO[] = filme;
-
-    //     expect(filmeArray).toHaveLength(1);
-
-    //     const [film] = filmeArray;
-    //     const { isbn, titel } = film!;
-
-    //     expect(isbn).toBe(isbnVorhanden);
-    //     expect(titel?.titel).toBeDefined();
-    // });
-
     test('Filme zu vorhandener "bewertung"', async () => {
         // given
         const body: GraphQLRequest = {

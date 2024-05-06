@@ -5,12 +5,11 @@
  */
 
 import { type DeleteResult, Repository } from 'typeorm';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import {
-    IdExistsException,
     VersionInvalidException,
     VersionOutdatedException,
 } from './exceptions.js';
-import { Injectable, NotFoundException } from '@nestjs/common';
 import { Film } from '../entity/film.entity.js';
 import { FilmReadService } from './film-read.service.js';
 import { Filmplakat } from '../entity/filmplakat.entity.js';
@@ -63,7 +62,6 @@ export class FilmWriteService {
      */
     async create(film: Film): Promise<number> {
         this.#logger.debug('create: film=%o', film);
-        await this.#validateCreate(film);
 
         const filmDb = await this.#repo.save(film); // implizite Transaktion
         this.#logger.debug('create: filmDb=%o', filmDb);
@@ -146,13 +144,6 @@ export class FilmWriteService {
             deleteResult.affected !== null &&
             deleteResult.affected > 0
         );
-    }
-
-    async #validateCreate({ id }: Film): Promise<undefined> {
-        this.#logger.debug('#validateCreate: id=%s', id);
-        if (await this.#repo.existsBy({ id })) {
-            throw new IdExistsException(id);
-        }
     }
 
     async #sendmail(film: Film) {

@@ -8,18 +8,6 @@ import { HttpException, HttpStatus } from '@nestjs/common';
  */
 
 /**
- * Exception-Klasse für eine bereits existierende Id-ummer.
- */
-export class IdExistsException extends HttpException {
-    constructor(readonly id: number | undefined) {
-        super(
-            `Die ISBN-Nummer ${id} existiert bereits.`,
-            HttpStatus.UNPROCESSABLE_ENTITY,
-        );
-    }
-}
-
-/**
  * Exception-Klasse für eine ungültige Versionsnummer beim Ändern.
  */
 export class VersionInvalidException extends HttpException {

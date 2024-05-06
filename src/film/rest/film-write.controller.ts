@@ -68,8 +68,7 @@ export class FilmWriteController {
      * dass damit der neu angelegter Film abgerufen werden kann.
      *
      * Falls Constraints verletzt sind, wird der Statuscode `400` (`Bad Request`)
-     * gesetzt und genauso auch wenn der Titel (oder die ISBN-Nummer) //todo bereits
-     * existieren.
+     * gesetzt und genauso auch wenn der Titel existieren.
      *
      * @param filmDTO JSON-Daten für ein Film im Request-Body.
      * @param res Leeres Response-Objekt von Express.

@@ -34,7 +34,6 @@ CREATE TABLE IF NOT EXISTS film (
     erzeugt        TEXT NOT NULL,
     aktualisiert   TEXT NOT NULL
 );
--- CREATE INDEX IF NOT EXISTS film_isbn_idx ON film(isbn);
 
 CREATE TABLE IF NOT EXISTS titel (
     id            INTEGER PRIMARY KEY AUTOINCREMENT,

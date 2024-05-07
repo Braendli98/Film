@@ -84,10 +84,11 @@ input SuchkriterienInput {
 input TitelInput {
   titel: String!
   untertitel: String
+  beschreibung:String
 }
 
 "Daten zu den FilmPlakat eines Filmes"
-input FilmPlakatInput {
+input FilmplakatInput {
   beschriftung: String!
   contentType: String!
 }
@@ -99,7 +100,7 @@ input FilmInput {
   preis: Float
   datum: String
   titel: TitelInput!
-  afilmplakate: [FilmPlakatInput!]
+  filmplakat: [FilmplakatInput!]
 }
 
 type CreatePayload {

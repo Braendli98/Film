@@ -129,7 +129,7 @@ describe('GraphQL Queries', () => {
         const [error] = errors!;
         const { message, path, extensions } = error;
 
-        expect(message).toBe(`Es gibt keinen Film mit der ID ${id}.`);
+        expect(message).toBe(`Es gibt kein Film mit der ID ${id}.`);
         expect(path).toBeDefined();
         expect(path![0]).toBe('film');
         expect(extensions).toBeDefined();
@@ -302,7 +302,7 @@ describe('GraphQL Queries', () => {
         });
     });
 
-    test('Kein Film zur nicht-vorhandenen "berwertung"', async () => {
+    test('Kein Film zur nicht-vorhandenen "bewertung"', async () => {
         // given
         const body: GraphQLRequest = {
             query: `

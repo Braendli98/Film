@@ -199,10 +199,10 @@ describe('GraphQL Mutations', () => {
                         input: {
                             id: "${id}",
                             version: 0,
-                            bewertung: 2,
-                            genre: Action,
-                            preis: 1,
-                            datum: "2022-10-10",
+                            bewertung: -2,
+                            genre: Horror,
+                            preis: -1,
+                            datum: "20225-10-10",
                         }
                     ) {
                         version

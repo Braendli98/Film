@@ -32,7 +32,7 @@ const geaenderterFilmIdNichtVorhanden: FilmDtoOhneRef = {
 const idNichtVorhanden = '999999';
 
 const geaenderterFilmInvalid: Record<string, unknown> = {
-    rating: -1,
+    bewertung: -1,
     genre: 'UNSICHTBAR',
     preis: -1,
     datum: '12345-123-123',

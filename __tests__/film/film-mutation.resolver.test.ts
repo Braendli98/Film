@@ -92,7 +92,6 @@ describe('GraphQL Mutations', () => {
     });
 
     // -------------------------------------------------------------------------
-    // eslint-disable-next-line max-lines-per-function
     test('Film mit ungueltigen Werten neu anlegen', async () => {
         // given
         const token = await loginGraphQL(client);
@@ -199,11 +198,11 @@ describe('GraphQL Mutations', () => {
                     update(
                         input: {
                             id: "${id}",
-                            version: 0,,
-                            rating: 2,
+                            version: 0,
+                            bewertung: 2,
                             genre: Action,
-                            preis: -1,
-                            datum: "12345-123-123",
+                            preis: 1,
+                            datum: "2022-10-10",
                         }
                     ) {
                         version
@@ -284,7 +283,7 @@ describe('GraphQL Mutations', () => {
         const { message, path, extensions } = error;
 
         expect(message).toBe(
-            `Es gibt keinen Film mit der ID ${id.toLowerCase()}.`,
+            `Es gibt kein Film mit der ID ${id.toLowerCase()}.`,
         );
         expect(path).toBeDefined();
         expect(path![0]).toBe('update');

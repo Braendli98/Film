@@ -20,14 +20,14 @@ schema {
   mutation: Mutation
 }
 
-"Funktionen, um Bücherdaten zu lesen"
+"Funktionen, um Filmdaten zu lesen"
 type Query {
   filme(suchkriterien: SuchkriterienInput): [Film!]
 
   film(id: ID!): Film
 }
 
-"Funktionen, um Bücher neu anzulegen, zu aktualisieren oder zu löschen"
+"Funktionen, um Filme neu anzulegen, zu aktualisieren oder zu löschen"
 type Mutation {
   create(input: FilmInput!): CreatePayload
 
@@ -47,7 +47,7 @@ type Titel {
 }
 
 "Daten zum Titel eines Filmes"
-type FilmPlakat {
+type Filmplakat {
   beschriftung: String!
   contentType: String
 }
@@ -61,19 +61,17 @@ type Film {
   genre: Genre
   preis: Float!
   datum: String
-  homepage: String
   # 1:1-Beziehung
   titel: Titel!
 }
 
 "Enum-Typ für die Art eines Filmes"
 enum Genre {
-  KOMOEDIE
   Action
-  FANTASY
+  Horror
 }
 
-"Suchkriterien für Bücher"
+"Suchkriterien für Fime"
 input SuchkriterienInput {
   titel: String
   bewertung: Int
@@ -83,11 +81,10 @@ input SuchkriterienInput {
 "Daten zum Titel eines neuen Filmes"
 input TitelInput {
   titel: String!
-  untertitel: String
   beschreibung:String
 }
 
-"Daten zu den FilmPlakat eines Filmes"
+"Daten zu den Filmplakat eines Filmes"
 input FilmplakatInput {
   beschriftung: String!
   contentType: String!
@@ -100,7 +97,7 @@ input FilmInput {
   preis: Float
   datum: String
   titel: TitelInput!
-  filmplakat: [FilmplakatInput!]
+  filmplakate: [FilmplakatInput!]
 }
 
 type CreatePayload {

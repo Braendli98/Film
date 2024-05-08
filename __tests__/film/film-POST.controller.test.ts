@@ -7,7 +7,6 @@ import {
     shutdownServer,
     startServer,
 } from '../testserver.js';
-import { type ErrorResponse } from './error-response.js';
 import { type FilmDTO } from '../../src/film/rest/filmDTO.entity.js';
 import { FilmReadService } from '../../src/film/service/film-read.service.js';
 import { HttpStatus } from '@nestjs/common';
@@ -162,5 +161,5 @@ describe('POST /rest', () => {
         expect(response.status).toBe(HttpStatus.UNAUTHORIZED);
     });
 
-    test.todo('Abgelaufener Token');
+    // test.todo('Abgelaufener Token');
 });

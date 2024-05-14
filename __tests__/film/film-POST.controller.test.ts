@@ -160,6 +160,4 @@ describe('POST /rest', () => {
         // then
         expect(response.status).toBe(HttpStatus.UNAUTHORIZED);
     });
-
-    // test.todo('Abgelaufener Token');
 });

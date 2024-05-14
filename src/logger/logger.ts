@@ -1,4 +1,3 @@
-
 /**
  * Das Modul besteht aus der Funktion {@linkcode getLogger} für einen Logger auf
  * der Basis von Pino: https://getpino.io. Pino wird auch von Fastify genutzt.

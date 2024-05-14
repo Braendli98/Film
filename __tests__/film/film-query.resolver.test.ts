@@ -420,48 +420,6 @@ describe('GraphQL Queries', () => {
         expect(extensions).toBeDefined();
         expect(extensions!.code).toBe('GRAPHQL_VALIDATION_FAILED');
     });
-
-    // test('Filme mit lieferbar=true', async () => {
-    //     // given
-    //     const body: GraphQLRequest = {
-    //         query: `
-    //             {
-    //                 filme(suchkriterien: {
-    //                     lieferbar: true
-    //                 }) {
-    //                     lieferbar
-    //                     titel {
-    //                         titel
-    //                     }
-    //                 }
-    //             }
-    //         `,
-    //     };
-
-    //     // when
-    //     const { status, headers, data }: AxiosResponse<GraphQLResponseBody> =
-    //         await client.post(graphqlPath, body);
-
-    //     // then
-    //     expect(status).toBe(HttpStatus.OK);
-    //     expect(headers['content-type']).toMatch(/json/iu);
-    //     expect(data.errors).toBeUndefined();
-
-    //     expect(data.data).toBeDefined();
-
-    //     const { filme } = data.data!;
-
-    //     expect(filme).not.toHaveLength(0);
-
-    //     const filmeArray: FilmDTO[] = filme;
-
-    //     filmeArray.forEach((film) => {
-    //         const { lieferbar, titel } = film;
-
-    //         expect(lieferbar).toBe(true);
-    //         expect(titel?.titel).toBeDefined();
-    //     });
-    // });
 });
 
 /* eslint-enable @typescript-eslint/no-unsafe-assignment */

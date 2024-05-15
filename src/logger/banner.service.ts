@@ -1,4 +1,3 @@
-
 /**
  * Das Modul enthält die Funktion, um die Test-DB neu zu laden.
  * @packageDocumentation

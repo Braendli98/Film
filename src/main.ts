@@ -1,4 +1,3 @@
-
 // https://github.com/tc39/proposal-type-annotations
 // NICHT: Enum, Parameter Properties, Namespace
 // https://devblogs.microsoft.com/typescript/a-proposal-for-type-syntax-in-javascript
@@ -26,7 +25,7 @@ const { httpsOptions, port } = nodeConfig;
 // "Arrow Function" ab ES 2015
 const setupSwagger = (app: INestApplication) => {
     const config = new DocumentBuilder()
-        .setTitle('Buch')
+        .setTitle('Film')
         .setDescription('Beispiel für Software Engineering')
         .setVersion('2024.04.0')
         .addBearerAuth()

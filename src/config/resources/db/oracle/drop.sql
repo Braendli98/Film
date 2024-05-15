@@ -17,7 +17,6 @@
 DROP INDEX IF EXISTS filmplakat_film_id_idx;
 DROP INDEX IF EXISTS titel_film_id_idx;
 DROP INDEX IF EXISTS titel_titel_idx;
--- DROP INDEX IF EXISTS buch_isbn_idx;
 
 -- https://docs.oracle.com/en/database/oracle/oracle-database/23/sqlrf/DROP-TABLE.html
 DROP TABLE IF EXISTS filmplakat;

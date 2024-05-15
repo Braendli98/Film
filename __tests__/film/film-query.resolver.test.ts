@@ -2,7 +2,7 @@
 /* eslint-disable max-lines */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
-import { type Film, type FilmGenre } from '../../src/film/entity/film.entity.js';
+import { type Film, type Genre } from '../../src/film/entity/film.entity.js';
 import { afterAll, beforeAll, describe, expect, test } from '@jest/globals';
 import axios, { type AxiosInstance, type AxiosResponse } from 'axios';
 import {
@@ -129,7 +129,7 @@ describe('GraphQL Queries', () => {
         const [error] = errors!;
         const { message, path, extensions } = error;
 
-        expect(message).toBe(`Es gibt keinen Film mit der ID ${id}.`);
+        expect(message).toBe(`Es gibt kein Film mit der ID ${id}.`);
         expect(path).toBeDefined();
         expect(path![0]).toBe('film');
         expect(extensions).toBeDefined();
@@ -257,49 +257,6 @@ describe('GraphQL Queries', () => {
         expect(extensions!.code).toBe('BAD_USER_INPUT');
     });
 
-    // test('Film zu vorhandener ISBN-Nummer', async () => {
-    //     // given
-    //     const body: GraphQLRequest = {
-    //         query: `
-    //             {
-    //                 buecher(suchkriterien: {
-    //                     isbn: "${isbnVorhanden}"
-    //                 }) {
-    //                     isbn
-    //                     titel {
-    //                         titel
-    //                     }
-    //                 }
-    //             }
-    //         `,
-    //     };
-
-    //     // when
-    //     const { status, headers, data }: AxiosResponse<GraphQLResponseBody> =
-    //         await client.post(graphqlPath, body);
-
-    //     // then
-    //     expect(status).toBe(HttpStatus.OK);
-    //     expect(headers['content-type']).toMatch(/json/iu);
-    //     expect(data.errors).toBeUndefined();
-
-    //     expect(data.data).toBeDefined();
-
-    //     const { buecher } = data.data!;
-
-    //     expect(buecher).not.toHaveLength(0);
-
-    //     const buecherArray: BuchDTO[] = buecher;
-
-    //     expect(buecherArray).toHaveLength(1);
-
-    //     const [buch] = buecherArray;
-    //     const { isbn, titel } = buch!;
-
-    //     expect(isbn).toBe(isbnVorhanden);
-    //     expect(titel?.titel).toBeDefined();
-    // });
-
     test('Filme zu vorhandener "bewertung"', async () => {
         // given
         const body: GraphQLRequest = {
@@ -345,7 +302,7 @@ describe('GraphQL Queries', () => {
         });
     });
 
-    test('Kein Film zur nicht-vorhandenen "berwertung"', async () => {
+    test('Kein Film zur nicht-vorhandenen "bewertung"', async () => {
         // given
         const body: GraphQLRequest = {
             query: `
@@ -386,7 +343,7 @@ describe('GraphQL Queries', () => {
 
     test('Filme zum Genre "Action"', async () => {
         // given
-        const filmGenre: FilmGenre = 'Action';
+        const filmGenre: Genre = 'Action';
         const body: GraphQLRequest = {
             query: `
                 {
@@ -463,48 +420,6 @@ describe('GraphQL Queries', () => {
         expect(extensions).toBeDefined();
         expect(extensions!.code).toBe('GRAPHQL_VALIDATION_FAILED');
     });
-
-    // test('Filme mit lieferbar=true', async () => {
-    //     // given
-    //     const body: GraphQLRequest = {
-    //         query: `
-    //             {
-    //                 buecher(suchkriterien: {
-    //                     lieferbar: true
-    //                 }) {
-    //                     lieferbar
-    //                     titel {
-    //                         titel
-    //                     }
-    //                 }
-    //             }
-    //         `,
-    //     };
-
-    //     // when
-    //     const { status, headers, data }: AxiosResponse<GraphQLResponseBody> =
-    //         await client.post(graphqlPath, body);
-
-    //     // then
-    //     expect(status).toBe(HttpStatus.OK);
-    //     expect(headers['content-type']).toMatch(/json/iu);
-    //     expect(data.errors).toBeUndefined();
-
-    //     expect(data.data).toBeDefined();
-
-    //     const { buecher } = data.data!;
-
-    //     expect(buecher).not.toHaveLength(0);
-
-    //     const buecherArray: BuchDTO[] = buecher;
-
-    //     buecherArray.forEach((buch) => {
-    //         const { lieferbar, titel } = buch;
-
-    //         expect(lieferbar).toBe(true);
-    //         expect(titel?.titel).toBeDefined();
-    //     });
-    // });
 });
 
 /* eslint-enable @typescript-eslint/no-unsafe-assignment */

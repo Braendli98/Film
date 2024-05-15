@@ -53,7 +53,7 @@ describe('GET /rest', () => {
 
         // then
         expect(status).toBe(HttpStatus.OK);
-        expect(headers['content-type']).toMatch(/json/iu); // eslint-disable-line sonarjs/no-duplicate-string
+        expect(headers['content-type']).toMatch(/json/iu);
         expect(data).toBeDefined();
 
         const { filme } = data._embedded;
@@ -109,51 +109,6 @@ describe('GET /rest', () => {
         expect(error).toBe('Not Found');
         expect(statusCode).toBe(HttpStatus.NOT_FOUND);
     });
-
-    // test('Mind. 1 Film mit vorhandenem Schlagwort', async () => {
-    //     // given
-    //     const params = { [schlagwortVorhanden]: 'true' };
-
-    //     // when
-    //     const { status, headers, data }: AxiosResponse<FilmeModel> =
-    //         await client.get('/', { params });
-
-    //     // then
-    //     expect(status).toBe(HttpStatus.OK);
-    //     expect(headers['content-type']).toMatch(/json/iu);
-    //     // JSON-Array mit mind. 1 JSON-Objekt
-    //     expect(data).toBeDefined();
-
-    //     const { filme } = data._embedded;
-
-    //     // Jedes Film hat im Array der Schlagwoerter z.B. "javascript"
-    //     filme
-    //         .map((film) => film.schlagwoerter)
-    //         .forEach((schlagwoerter) =>
-    //             expect(schlagwoerter).toEqual(
-    //                 expect.arrayContaining([schlagwortVorhanden.toUpperCase()]),
-    //             ),
-    //         );
-    // });
-
-    // test('Keine FIlme zu einem nicht vorhandenen Schlagwort', async () => {
-    //     // given
-    //     const params = { [schlagwortNichtVorhanden]: 'true' };
-
-    //     // when
-    //     const { status, data }: AxiosResponse<ErrorResponse> = await client.get(
-    //         '/',
-    //         { params },
-    //     );
-
-    //     // then
-    //     expect(status).toBe(HttpStatus.NOT_FOUND);
-
-    //     const { error, statusCode } = data;
-
-    //     expect(error).toBe('Not Found');
-    //     expect(statusCode).toBe(HttpStatus.NOT_FOUND);
-    // });
 
     test('Keine Filme zu einer nicht-vorhandenen Property', async () => {
         // given

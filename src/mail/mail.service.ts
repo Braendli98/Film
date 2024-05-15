@@ -1,4 +1,3 @@
-
 /**
  * Das Modul besteht aus der Klasse {@linkcode MailService} für das
  * Verschicken von Emails.

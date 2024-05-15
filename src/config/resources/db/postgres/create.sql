@@ -32,7 +32,7 @@ ALTER ROLE film SET search_path = 'film';
 
 -- https://www.postgresql.org/docs/current/sql-createtype.html
 -- https://www.postgresql.org/docs/current/datatype-enum.html
-CREATE TYPE filmgenre AS ENUM ('DRUCKAUSGABE', 'KINDLE');
+CREATE TYPE filmgenre AS ENUM ('Action', 'Horror');
 
 -- https://www.postgresql.org/docs/current/sql-createtable.html
 -- https://www.postgresql.org/docs/current/datatype.html
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS titel (
     id          integer GENERATED ALWAYS AS IDENTITY(START WITH 1000) PRIMARY KEY USING INDEX TABLESPACE filmspace,
     titel       varchar(40) NOT NULL,
     beschreibung  varchar(40),
-    film_id     integer NOT NULL UNIQUE USING INDEX TABLESPACE flmspace REFERENCES film
+    film_id     integer NOT NULL UNIQUE USING INDEX TABLESPACE filmspace REFERENCES film
 ) TABLESPACE filmspace;
 
 

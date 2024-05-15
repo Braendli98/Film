@@ -16,7 +16,7 @@ fi
 echo -en "\033]1; dependency-check \007"
 
 nvdApiKey='12345678-1234-1234-1234-123456789012'
-project='buch'
+project='film'
 
 if [ ! -e $pathZimmermmann ]
 then

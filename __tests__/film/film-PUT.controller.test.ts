@@ -1,20 +1,3 @@
-/*
- * Copyright (C) 2016 - present Juergen Zimmermann, Hochschule Karlsruhe
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */
-
 import { afterAll, beforeAll, describe, test } from '@jest/globals';
 import axios, { type AxiosInstance, type AxiosResponse } from 'axios';
 import {
@@ -24,8 +7,8 @@ import {
     shutdownServer,
     startServer,
 } from '../testserver.js';
-import { type FilmDtoOhneRef } from '../../src/film/rest/filmDTO.entity.js';
 import { type ErrorResponse } from './error-response.js';
+import { type FilmDtoOhneRef } from '../../src/film/rest/filmDTO.entity.js';
 import { HttpStatus } from '@nestjs/common';
 import { loginRest } from '../login.js';
 
@@ -49,7 +32,7 @@ const geaenderterFilmIdNichtVorhanden: FilmDtoOhneRef = {
 const idNichtVorhanden = '999999';
 
 const geaenderterFilmInvalid: Record<string, unknown> = {
-    rating: -1,
+    bewertung: -1,
     genre: 'UNSICHTBAR',
     preis: -1,
     datum: '12345-123-123',
@@ -57,7 +40,7 @@ const geaenderterFilmInvalid: Record<string, unknown> = {
 };
 
 const veralterFilm: FilmDtoOhneRef = {
-    rating: 1,
+    bewertung: 1,
     genre: 'Action',
     preis: 44.4,
     datum: '2022-02-04',

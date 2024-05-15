@@ -7,7 +7,6 @@ import {
     shutdownServer,
     startServer,
 } from '../testserver.js';
-import { type ErrorResponse } from './error-response.js';
 import { type FilmDTO } from '../../src/film/rest/filmDTO.entity.js';
 import { FilmReadService } from '../../src/film/service/film-read.service.js';
 import { HttpStatus } from '@nestjs/common';
@@ -25,7 +24,7 @@ const neuerFilm: FilmDTO = {
         titel: 'Titelpost',
         beschreibung: 'beschreibungpos',
     },
-    filmplakte: [
+    filmplakate: [
         {
             beschriftung: 'Abb. 1',
             contentType: 'img/png',
@@ -33,7 +32,7 @@ const neuerFilm: FilmDTO = {
     ],
 };
 const neuerFilmInvalid: Record<string, unknown> = {
-    rating: -1,
+    bewertung: -1,
     genre: 'UNSICHTBAR',
     preis: -1,
     datum: '12345-123-123',
@@ -42,22 +41,6 @@ const neuerFilmInvalid: Record<string, unknown> = {
         beschreibung: 'Beschreibunginvalid',
     },
 };
-// const neuesFilmIsbnExistiert: BuchDTO = {
-//     isbn: '978-3-897-22583-1',
-//     rating: 1,
-//     art: 'DRUCKAUSGABE',
-//     preis: 99.99,
-//     rabatt: 0.099,
-//     lieferbar: true,
-//     datum: '2022-02-28',
-//     homepage: 'https://post.isbn/',
-//     schlagwoerter: ['JAVASCRIPT', 'TYPESCRIPT'],
-//     titel: {
-//         titel: 'Titelpostisbn',
-//         untertitel: 'Untertitelpostisbn',
-//     },
-//     abbildungen: undefined,
-// };
 
 // -----------------------------------------------------------------------------
 // T e s t s
@@ -151,27 +134,6 @@ describe('POST /rest', () => {
         expect(messages).toEqual(expect.arrayContaining(expectedMsg));
     });
 
-    // // test('Neuer Film, aber die ISBN existiert bereits', async () => {
-    // //     // given
-    // //     const token = await loginRest(client);
-    // //     headers.Authorization = `Bearer ${token}`;
-
-    // //     // when
-    // //     const response: AxiosResponse<ErrorResponse> = await client.post(
-    // //         '/rest',
-    // //         neuesBuchIsbnExistiert,
-    // //         { headers },
-    // //     );
-
-    //     // then
-    //     const { data } = response;
-
-    //     const { message, statusCode } = data;
-
-    //     expect(message).toEqual(expect.stringContaining('ISBN'));
-    //     expect(statusCode).toBe(HttpStatus.UNPROCESSABLE_ENTITY);
-    // });
-
     test('Neuer Film, aber ohne Token', async () => {
         // when
         const response: AxiosResponse<Record<string, any>> = await client.post(
@@ -198,6 +160,4 @@ describe('POST /rest', () => {
         // then
         expect(response.status).toBe(HttpStatus.UNAUTHORIZED);
     });
-
-    test.todo('Abgelaufener Token');
 });

@@ -10,7 +10,7 @@ echo -en "\033]1; dive \007"
 
 diveVersion='v0.12.0'
 imagePrefix='juergenzimmermann/'
-imageBase='buch'
+imageBase='film'
 imageTag="2024.04.0-$base"
 
 image="$imagePrefix${imageBase}:$imageTag"

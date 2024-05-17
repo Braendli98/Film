@@ -2,9 +2,9 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "Fixes" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "Fixes" ]
 
 jobs:
 
@@ -15,6 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
-      env:
-        MY_SECRET: ${{ secrets.My_Secret }}
+      run: docker build --tag juergenzimmermann/film:2024.04.0-bookworm --file Dockerfile .

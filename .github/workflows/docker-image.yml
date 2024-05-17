@@ -17,4 +17,4 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
       env:
-        MY_SECRET: ${{ secrets.DATABASE_PASSWORD }}
+        MY_SECRET: ${{ secrets.My_Secret }}

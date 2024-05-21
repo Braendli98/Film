@@ -78,7 +78,7 @@ pipeline {
                 parallel(
                     'Test': {
                         echo 'TODO: Rechnername/IP-Adresse des DB-Servers fuer Tests konfigurieren'
-                        //sh 'npm run test:coverage'
+                        // sh 'npm run test:coverage'
                     },
                     'ESLint': {
                         sh 'npx eslint --version'
@@ -91,4 +91,66 @@ pipeline {
                         sh 'npx asciidoctor --version'
                         sh 'npm run asciidoctor'
                     },
-                    'reveal
+                    'reveal.js': {
+                        sh 'npx asciidoctor-revealjs --version'
+                        sh 'npm run revealjs'
+                    },
+                    'TypeDoc': {
+                        sh 'npx typedoc --version'
+                        sh 'npm run typedoc'
+                    }
+                )
+            }
+
+            post {
+                always {
+                    echo 'TODO: Links fuer Coverage und TypeDoc'
+
+                    publishHTML(target: [
+                        reportDir: '.extras/doc/projekthandfilm/html',
+                        reportFiles: 'projekthandfilm.html',
+                        reportName: 'Projekthandfilm',
+                        reportTitles: 'Projekthandfilm'
+                    ])
+
+                    publishHTML(target: [
+                        reportDir: '.extras/doc/folien',
+                        reportFiles: 'folien.html',
+                        reportName: 'Folien (reveal.js)',
+                        reportTitles: 'reveal.js'
+                    ])
+
+                    publishHTML(target: [
+                        reportDir: '.extras/doc/api',
+                        reportFiles: 'index.html',
+                        reportName: 'TypeDoc',
+                        reportTitles: 'TypeDoc'
+                    ])
+                }
+
+                success {
+                    script {
+                        if (fileExists("${env.WORKSPACE}/film.zip")) {
+                            sh 'rm film.zip'
+                        }
+                    }
+                    zip zipFile: 'film.zip', dir: 'dist'
+                    archiveArtifacts artifacts: 'film.zip', allowEmptyArchive: true
+                }
+            }
+        }
+
+        stage('Docker Image bauen') {
+            steps {
+                echo 'TODO: Docker-Image bauen und veroeffentlichen'
+                // sh 'docker buildx build --tag gruppe8/film:2024.04.0 .'
+            }
+        }
+
+        stage('Deployment fuer Kubernetes') {
+            steps {
+                echo 'TODO: Deployment fuer Kubernetes mit z.B. Ansible, Terraform'
+            }
+        }
+    }
+}

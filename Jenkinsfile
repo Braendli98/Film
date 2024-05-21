@@ -31,6 +31,10 @@ pipeline {
                 sh 'rm -rf .extras/doc/projekthandfilm/html'
 
                 git url: 'https://github.com/Braendli98/Film.git', branch: 'main', poll: true
+
+               // Erstellen Sie die erforderlichen Verzeichnisse
+        sh 'mkdir -p .extras/doc/projekthandfilm'
+        sh 'mkdir -p .extras/doc/folien'
             }
         }
 

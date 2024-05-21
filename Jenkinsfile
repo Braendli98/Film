@@ -38,6 +38,8 @@ pipeline {
         stage('Checkout SCM') {
             steps {
                 git url: 'https://github.com/Braendli98/Film.git', branch: 'main', poll: true
+                // Set permissions for checked out files
+                sh 'chmod -R 777 ${WORKSPACE}'
             }
         }
 

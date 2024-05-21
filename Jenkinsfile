@@ -11,7 +11,7 @@ pipeline {
     }
 
     stages {
-        stage('Init') {
+        stage('Prepare Workspace') {
             steps {
                 script {
                     if (!isUnix()) {
@@ -20,13 +20,27 @@ pipeline {
                 }
 
                 echo "Jenkins-Job ${env.JOB_NAME} #${env.BUILD_ID} mit Workspace ${env.WORKSPACE}"
-
-                sh 'rm -rf src __tests__ node_modules dist .extras/doc/api .extras/doc/folien/folien.html .extras/doc/projekthandbuch/html'
                 
                 // Set permissions for workspace
                 sh 'chmod -R 777 ${WORKSPACE}'
+            }
+        }
 
+        stage('Checkout SCM') {
+            steps {
                 git url: 'https://github.com/Braendli98/Film.git', branch: 'main', poll: true
+            }
+        }
+
+        stage('Init') {
+            steps {
+                sh 'rm -rf src'
+                sh 'rm -rf __tests__'
+                sh 'rm -rf node_modules'
+                sh 'rm -rf dist'
+                sh 'rm -rf .extras/doc/api'
+                sh 'rm -rf .extras/doc/folien/folien.html'
+                sh 'rm -rf .extras/doc/projekthandbuch/html'
 
                 // Erstellen Sie die erforderlichen Verzeichnisse
                 sh 'mkdir -p .extras/doc/projekthandbuch'

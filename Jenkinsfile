@@ -2,13 +2,12 @@ pipeline {
     agent {
         docker {
             image 'anastasiaana/my-node-image:latest'
-            args '--publish 3000:3000 --publish 5000:5000'
-            args '--user root:root'
+            args '--publish 3000:3000 --publish 5000:5000 --user root:root'
         }
     }
 
     options {
-        timeout time: 60, unit: 'MINUTES'
+        timeout(time: 60, unit: 'MINUTES')
     }
 
     stages {
@@ -22,19 +21,13 @@ pipeline {
 
                 echo "Jenkins-Job ${env.JOB_NAME} #${env.BUILD_ID} mit Workspace ${env.WORKSPACE}"
 
-                sh 'rm -rf src'
-                sh 'rm -rf __tests__'
-                sh 'rm -rf node_modules'
-                sh 'rm -rf dist'
-                sh 'rm -rf .extras/doc/api'
-                sh 'rm -rf .extras/doc/folien/folien.html'
-                sh 'rm -rf .extras/doc/projekthandbuch/html'
+                sh 'rm -rf src __tests__ node_modules dist .extras/doc/api .extras/doc/folien/folien.html .extras/doc/projekthandbuch/html'
 
                 git url: 'https://github.com/Braendli98/Film.git', branch: 'main', poll: true
 
-               // Erstellen Sie die erforderlichen Verzeichnisse
-        sh 'mkdir -p .extras/doc/projekthandbuch'
-        sh 'mkdir -p .extras/doc/folien'
+                // Erstellen Sie die erforderlichen Verzeichnisse
+                sh 'mkdir -p .extras/doc/projekthandbuch'
+                sh 'mkdir -p .extras/doc/folien'
             }
         }
 
@@ -78,32 +71,42 @@ pipeline {
         }
 
         stage('Test, Codeanalyse, Security, Dok.') {
-            steps {
-                parallel(
-                    'Test': {
+            parallel {
+                stage('Test') {
+                    steps {
                         echo 'TODO: Rechnername/IP-Adresse des DB-Servers fuer Tests konfigurieren'
                         // sh 'npm run test:coverage'
-                    },
-                    'ESLint': {
+                    }
+                }
+                stage('ESLint') {
+                    steps {
                         sh 'npx eslint --version'
                         sh 'npm run eslint'
-                    },
-                    'Security Audit': {
+                    }
+                }
+                stage('Security Audit') {
+                    steps {
                         sh 'npm audit --omit=dev'
-                    },
-                    'AsciiDoctor': {
+                    }
+                }
+                stage('AsciiDoctor') {
+                    steps {
                         sh 'npx asciidoctor --version'
                         sh 'npm run asciidoctor'
-                    },
-                    'reveal.js': {
+                    }
+                }
+                stage('reveal.js') {
+                    steps {
                         sh 'npx asciidoctor-revealjs --version'
                         sh 'npm run revealjs'
-                    },
-                    'TypeDoc': {
+                    }
+                }
+                stage('TypeDoc') {
+                    steps {
                         sh 'npx typedoc --version'
                         sh 'npm run typedoc'
                     }
-                )
+                }
             }
 
             post {

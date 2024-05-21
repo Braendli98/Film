@@ -196,9 +196,9 @@ pipeline {
                         }
                     }
                     // https://www.jenkins.io/doc/pipeline/steps/pipeline-utility-steps/#zip-create-zip-file
-                    zip zipFile: 'film.zip', archive: false, dir: 'dist'
+                    zip zipFile: 'film.zip', dir: 'dist'
                     // jobs/film/builds/.../archive/film.zip
-                    archiveArtifacts 'film.zip'
+                    archiveArtifacts artifacts: 'film.zip', allowEmptyArchive: true
                 }
             }
         }

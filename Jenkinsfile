@@ -28,6 +28,11 @@ pipeline {
 
         stage('Checkout SCM') {
             steps {
+                // Set permissions for workspace directories
+                sh 'mkdir -p .extras/doc/folien'
+                sh 'mkdir -p .extras/doc/projekthandbuch'
+                sh 'chmod -R 777 .extras'
+
                 git url: 'https://github.com/Braendli98/Film.git', branch: 'main', poll: true
             }
         }

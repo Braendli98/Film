@@ -22,7 +22,7 @@ pipeline {
                 echo "Jenkins-Job ${env.JOB_NAME} #${env.BUILD_ID} mit Workspace ${env.WORKSPACE}"
 
                 sh 'rm -rf src __tests__ node_modules dist .extras/doc/api .extras/doc/folien/folien.html .extras/doc/projekthandbuch/html'
-
+                
                 // Set permissions for workspace
                 sh 'chmod -R 777 ${WORKSPACE}'
 

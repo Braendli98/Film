@@ -23,6 +23,9 @@ pipeline {
 
                 sh 'rm -rf src __tests__ node_modules dist .extras/doc/api .extras/doc/folien/folien.html .extras/doc/projekthandbuch/html'
 
+                // Set permissions for workspace
+                sh 'chmod -R 777 ${WORKSPACE}'
+
                 git url: 'https://github.com/Braendli98/Film.git', branch: 'main', poll: true
 
                 // Erstellen Sie die erforderlichen Verzeichnisse

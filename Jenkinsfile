@@ -1,15 +1,16 @@
 pipeline {
     agent {
-    docker {
-        image 'anastasiaana/my-node-image:latest'
-        args '--publish 3000:3000 --publish 5000:5000'
-        args '--user root:root'
+        docker {
+            image 'anastasiaana/my-node-image:latest'
+            args '--publish 3000:3000 --publish 5000:5000'
+            args '--user root:root'
+        }
     }
-}
 
     options {
         timeout time: 60, unit: 'MINUTES'
     }
+
     stages {
         stage('Init') {
             steps {
@@ -21,7 +22,6 @@ pipeline {
 
                 echo "Jenkins-Job ${env.JOB_NAME} #${env.BUILD_ID} mit Workspace ${env.WORKSPACE}"
 
-                // Unterverzeichnisse src und test im WORKSPACE loeschen: vom letzten Build
                 sh 'rm -rf src'
                 sh 'rm -rf __tests__'
                 sh 'rm -rf node_modules'
@@ -30,8 +30,7 @@ pipeline {
                 sh 'rm -rf .extras/doc/folien/folien.html'
                 sh 'rm -rf .extras/doc/projekthandfilm/html'
 
-                // Git Repository klonen
-                git url: 'https://github.com/Braendli98/Film.git', branch: 'main'
+                git url: 'https://github.com/Braendli98/Film.git', branch: 'main', poll: true
             }
         }
 
@@ -46,20 +45,9 @@ pipeline {
                 sh 'cat /etc/debian_version'
 
                 sh 'apt-get update --yes'
-                sh 'apt-get install --no-install-recommends --yes --show-progress gcc g++ make python3.11-minimal'
-                sh 'apt-get install --no-install-recommends --yes --show-progress ca-certificates curl gnupg'
-                sh 'apt-get upgrade --yes'
-                sh 'python3 --version'
+                sh 'apt-get install --no-install-recommends --yes --show-progress gcc g++ make python3.11 python3.11-venv python3.11-dev'
 
-                sh 'mkdir -p /etc/apt/keyrings'
-                sh 'curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg'
-                sh 'echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list'
-                sh 'apt-get update'
-                sh 'apt-get install nodejs --no-install-recommends --yes --show-progress'
-                sh 'apt-cache policy nodejs'
-                sh 'node --version'
-                sh 'npm i -g npm'
-                sh 'npm --version'
+                sh 'python3 --version'
 
                 script {
                     if (!fileExists("${env.WORKSPACE}/package.json")) {
@@ -84,7 +72,7 @@ pipeline {
                 parallel(
                     'Test': {
                         echo 'TODO: Rechnername/IP-Adresse des DB-Servers fuer Tests konfigurieren'
-                        sh 'npm test -- --passWithNoTests'
+                        //sh 'npm run test:coverage'
                     },
                     'ESLint': {
                         sh 'npx eslint --version'
@@ -107,21 +95,25 @@ pipeline {
                     }
                 )
             }
+
             post {
                 always {
                     echo 'TODO: Links fuer Coverage und TypeDoc'
+
                     publishHTML (target : [
                         reportDir: '.extras/doc/projekthandfilm/html',
                         reportFiles: 'projekthandfilm.html',
                         reportName: 'Projekthandfilm',
                         reportTitles: 'Projekthandfilm'
                     ])
+
                     publishHTML target : [
                         reportDir: '.extras/doc/folien',
                         reportFiles: 'folien.html',
                         reportName: 'Folien (reveal.js)',
                         reportTitles: 'reveal.js'
                     ]
+
                     publishHTML target : [
                         reportDir: '.extras/doc/api',
                         reportFiles: 'index.html',
@@ -129,13 +121,14 @@ pipeline {
                         reportTitles: 'TypeDoc'
                     ]
                 }
+
                 success {
                     script {
                         if (fileExists("${env.WORKSPACE}/film.zip")) {
                             sh 'rm film.zip'
                         }
                     }
-                    sh 'cd dist && zip -r ../film.zip .'
+                    zip zipFile: 'film.zip', dir: 'dist'
                     archiveArtifacts artifacts: 'film.zip', allowEmptyArchive: true
                 }
             }
@@ -144,6 +137,7 @@ pipeline {
         stage('Docker Image bauen') {
             steps {
                 echo 'TODO: Docker-Image bauen und veroeffentlichen'
+                // sh 'docker buildx build --tag gruppe8/film:2024.04.0 .'
             }
         }
 

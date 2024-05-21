@@ -28,12 +28,12 @@ pipeline {
                 sh 'rm -rf dist'
                 sh 'rm -rf .extras/doc/api'
                 sh 'rm -rf .extras/doc/folien/folien.html'
-                sh 'rm -rf .extras/doc/projekthandfilm/html'
+                sh 'rm -rf .extras/doc/projekthandbuch/html'
 
                 git url: 'https://github.com/Braendli98/Film.git', branch: 'main', poll: true
 
                // Erstellen Sie die erforderlichen Verzeichnisse
-        sh 'mkdir -p .extras/doc/projekthandfilm'
+        sh 'mkdir -p .extras/doc/projekthandbuch'
         sh 'mkdir -p .extras/doc/folien'
             }
         }
@@ -111,10 +111,10 @@ pipeline {
                     echo 'TODO: Links fuer Coverage und TypeDoc'
 
                     publishHTML(target: [
-                        reportDir: '.extras/doc/projekthandfilm/html',
-                        reportFiles: 'projekthandfilm.html',
-                        reportName: 'Projekthandfilm',
-                        reportTitles: 'Projekthandfilm'
+                        reportDir: '.extras/doc/projekthandbuch/html',
+                        reportFiles: 'projekthandbuch.html',
+                        reportName: 'Projekthandbuch',
+                        reportTitles: 'Projekthandbuch'
                     ])
 
                     publishHTML(target: [

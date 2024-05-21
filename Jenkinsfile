@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'my-node-image:latest'
+            image 'gruppe8/film:2024.04.0-bookworm'
             args '--publish 3000:3000 --publish 5000:5000 --user root:root'
         }
     }
@@ -16,7 +16,10 @@ pipeline {
                         error 'Unix ist erforderlich'
                     }
                 }
+
                 echo "Jenkins-Job ${env.JOB_NAME} #${env.BUILD_ID} mit Workspace ${env.WORKSPACE}"
+
+                // Unterverzeichnisse src und test im WORKSPACE loeschen: vom letzten Build
                 sh 'rm -rf src'
                 sh 'rm -rf __tests__'
                 sh 'rm -rf node_modules'
@@ -24,9 +27,12 @@ pipeline {
                 sh 'rm -rf .extras/doc/api'
                 sh 'rm -rf .extras/doc/folien/folien.html'
                 sh 'rm -rf .extras/doc/projekthandfilm/html'
-                git url: 'https://github.com/Braendli98/Film.git', branch: 'main', credentialsId: 'github-credentials' // <-- Hinzugefügt
+
+                // Git Repository klonen
+                git url: 'https://github.com/Braendli98/Film.git', branch: 'main', credentialsId: 'github-credentials'
             }
         }
+
         stage('Install') {
             steps {
                 sh 'id'
@@ -36,12 +42,14 @@ pipeline {
                 sh 'uname -a'
                 sh 'cat /etc/os-release'
                 sh 'cat /etc/debian_version'
+
                 sh 'apt-cache policy nodejs'
-                sh 'apt-get install --no-install-recommends --yes --show-progress gcc=4:12.2.0-3 g++=4:12.2.0-3 make=4.3-4.1 python3.11-minimal=3.11.2-6'
-                sh 'apt-get install --no-install-recommends --yes --show-progress ca-certificates=20230311 curl=7.88.1-10+deb12u5 gnupg=2.2.40-1.1'
+                sh 'apt-get install --no-install-recommends --yes --show-progress gcc g++ make python3.11-minimal'
+                sh 'apt-get install --no-install-recommends --yes --show-progress ca-certificates curl gnupg'
                 sh 'apt-get update --yes'
                 sh 'apt-get upgrade --yes'
                 sh 'python3 --version'
+
                 sh 'mkdir -p /etc/apt/keyrings'
                 sh 'curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg'
                 sh 'echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list'
@@ -51,27 +59,31 @@ pipeline {
                 sh 'node --version'
                 sh 'npm i -g npm'
                 sh 'npm --version'
+
                 script {
                     if (!fileExists("${env.WORKSPACE}/package.json")) {
                         error "package.json ist *NICHT* in ${env.WORKSPACE} vorhanden"
                     }
                 }
+
                 sh 'cat package.json'
                 sh 'npm ci --no-fund --no-audit'
             }
         }
+
         stage('Compile') {
             steps {
                 sh 'npx tsc --version'
                 sh './node_modules/.bin/tsc'
             }
         }
+
         stage('Test, Codeanalyse, Security, Dok.') {
             steps {
                 parallel(
                     'Test': {
                         echo 'TODO: Rechnername/IP-Adresse des DB-Servers fuer Tests konfigurieren'
-                        sh 'npm test -- --passWithNoTests' // <-- Geändert
+                        sh 'npm test -- --passWithNoTests'
                     },
                     'ESLint': {
                         sh 'npx eslint --version'
@@ -122,16 +134,18 @@ pipeline {
                             sh 'rm film.zip'
                         }
                     }
-                    sh 'cd dist && zip -r ../film.zip .' // <-- Geändert
+                    sh 'cd dist && zip -r ../film.zip .'
                     archiveArtifacts artifacts: 'film.zip', allowEmptyArchive: true
                 }
             }
         }
+
         stage('Docker Image bauen') {
             steps {
                 echo 'TODO: Docker-Image bauen und veroeffentlichen'
             }
         }
+
         stage('Deployment fuer Kubernetes') {
             steps {
                 echo 'TODO: Deployment fuer Kubernetes mit z.B. Ansible, Terraform'

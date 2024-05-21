@@ -1,0 +1,17 @@
+' Preview durch <Alt>d
+
+@startuml Sequenzdiagramm
+
+actor Gast
+
+boundary FilmGetController
+control FilmReadService
+database film
+
+Gast -> FilmGetController : GET / getById()
+FilmGetController -> FilmReadService: findById()
+FilmReadService -> film: [TypeORM]
+
+footer (c) Pascal Brändli
+
+@enduml

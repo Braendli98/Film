@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'gruppe8/film:2024.04.0-bookworm'
+            image 'my-node-image:latest'
             args '--publish 3000:3000 --publish 5000:5000 --user root:root'
         }
     }
@@ -29,7 +29,7 @@ pipeline {
                 sh 'rm -rf .extras/doc/projekthandfilm/html'
 
                 // Git Repository klonen
-                git url: 'https://github.com/Braendli98/Film.git', branch: 'main', credentialsId: 'github-credentials'
+                git url: 'https://github.com/Braendli98/Film.git', branch: 'main'
             }
         }
 
@@ -43,10 +43,9 @@ pipeline {
                 sh 'cat /etc/os-release'
                 sh 'cat /etc/debian_version'
 
-                sh 'apt-cache policy nodejs'
+                sh 'apt-get update --yes'
                 sh 'apt-get install --no-install-recommends --yes --show-progress gcc g++ make python3.11-minimal'
                 sh 'apt-get install --no-install-recommends --yes --show-progress ca-certificates curl gnupg'
-                sh 'apt-get update --yes'
                 sh 'apt-get upgrade --yes'
                 sh 'python3 --version'
 

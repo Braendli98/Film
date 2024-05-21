@@ -1,10 +1,12 @@
 pipeline {
     agent {
-        docker {
-            image 'my-node-image:latest'
-            args '--publish 3000:3000 --publish 5000:5000 --user root:root'
-        }
+    docker {
+        image 'anastasiaana/my-node-image:latest'
+        args '--publish 3000:3000 --publish 5000:5000'
+        args '--user root:root'
     }
+}
+
     options {
         timeout time: 60, unit: 'MINUTES'
     }

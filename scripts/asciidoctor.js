@@ -16,12 +16,12 @@ kroki.register(adoc.Extensions);
 const options = {
     safe: 'safe',
     attributes: { linkcss: true },
-    base_dir: '.extras/doc/projekthandfilm',
+    base_dir: '.extras/doc/projekthandbuch',
     to_dir: 'html',
     mkdirs: true,
 };
 adoc.convertFile(
-    join('.extras', 'doc', 'projekthandfilm', 'projekthandfilm.adoc'),
+    join('.extras', 'doc', 'projekthandbuch', 'projekthandbuch.adoc'),
     options,
 );
 
@@ -32,18 +32,18 @@ console.log(
         '..',
         '.extras',
         'doc',
-        'projekthandfilm',
+        'projekthandbuch',
         'html',
-        'projekthandfilm.html',
+        'projekthandbuch.html',
     )}`,
 );
 
 // https://asciidoctor.github.io/asciidoctor.js/master
 // const htmlString = asciidoctor.convert(
-//     fs.readFileSync(join('extras', 'doc', 'projekthandfilm.adoc')),
+//     fs.readFileSync(join('extras', 'doc', 'projekthandbuch.adoc')),
 //     { safe: 'safe', attributes: { linkcss: true }, base_dir: 'doc' },
 // );
-// const htmlFile = join('extras', 'doc', 'projekthandfilm.html');
+// const htmlFile = join('extras', 'doc', 'projekthandbuch.html');
 // fs.writeFileSync(htmlFile, htmlString);
 
 // console.log(`HTML-Datei ${join(__dirname, '..', htmlFile)}`);

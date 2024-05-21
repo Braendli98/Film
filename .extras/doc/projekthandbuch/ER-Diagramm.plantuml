@@ -1,0 +1,44 @@
+' Preview durch <Alt>d
+
+@startuml ER Diagramm
+
+' hide the spot
+hide circle
+
+' evtl. Prbleme mit Kraehenfuessen vermeiden
+skinparam linetype ortho
+
+entity "Film" {
+  * id: integer <<generated>>
+  --
+  * version: integer
+  * bewertung: number
+  * g: text
+  * preis: number
+  * datum: date
+  * **titel_id**: integer <<FK>>
+  * erzeugt: timestamp
+  * aktualisiert: timestamp
+}
+
+entity "Titel" {
+  * id: integer <<generated>>
+  --
+  * titel: text
+    beschreibung: text
+}
+
+entity "Filmplakt" {
+  * id: integer <<generated>>
+  --
+  * beschriftung: text
+    contentType: text
+  * **film_id**: integer <<FK>>
+}
+
+Film ||..|| Titel
+Film ||..o{ Abbildung
+
+footer (c) Pascal Brändli
+
+@enduml

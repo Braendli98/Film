@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1.7.0.
+# syntax=docker/dockerfile:1.7.0
 
 # Aufruf:   docker build --tag juergenzimmermann/jenkins:2024.04.0 .
 #           Get-Content Dockerfile | docker run --rm --interactive hadolint/hadolint:2.12.1-beta-debian

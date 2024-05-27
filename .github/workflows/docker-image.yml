@@ -12,6 +12,28 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:13
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: film
+          POSTGRES_USER: film_user
+          POSTGRES_PASSWORD: password
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DATABASE_HOST: localhost
+      DATABASE_PORT: 5432
+      DATABASE_USER: film_user
+      DATABASE_PASSWORD: password
+      DATABASE_NAME: film
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -23,10 +45,17 @@ jobs:
 
       - name: Create .env file
         run: |
-          echo "${{ secrets.MY_SECRET }}" > .env
+          echo "DATABASE_HOST=localhost" >> .env
+          echo "DATABASE_PORT=5432" >> .env
+          echo "DATABASE_USER=film_user" >> .env
+          echo "DATABASE_PASSWORD=password" >> .env
+          echo "DATABASE_NAME=film" >> .env
 
       - name: Install dependencies
         run: npm install
+
+      - name: Initialize database
+        run: node initializeDatabase.js
 
       - name: Build project
         run: npm run build
@@ -37,4 +66,4 @@ jobs:
       - name: Build Docker image
         run: docker build -t my-image-name .
 
-      # Weitere Schritte wie das Pushen des Docker-Images oder das Deployment
+      # Weitere Schritte wie das Pushen des Docker-Images oder das Deployment können hier hinzugefügt werden

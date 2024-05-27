@@ -15,8 +15,6 @@
 
 -- https://www.sqlite.org/lang_dropindex.html
 DROP INDEX IF EXISTS filmplakat_film_id_idx;
-
--- https://www.sqlite.org/lang_droptable.html
 DROP TABLE IF EXISTS filmplakat;
 DROP TABLE IF EXISTS titel;
 DROP TABLE IF EXISTS film;

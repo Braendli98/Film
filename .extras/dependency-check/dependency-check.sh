@@ -15,7 +15,7 @@ fi
 # https://apple.stackexchange.com/questions/364723/how-do-i-set-the-terminal-tab-title-via-command-line
 echo -en "\033]1; dependency-check \007"
 
-nvdApiKey='12345678-1234-1234-1234-123456789012'
+nvdApiKey='aba30abb-6cd2-4494-870e-789fd40e2de8'
 project='film'
 
 if [ ! -e $pathZimmermmann ]

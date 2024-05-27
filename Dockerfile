@@ -104,7 +104,7 @@ set -eux
 apt-get update
 # https://github.com/Yelp/dumb-init
 # https://packages.debian.org/bookworm/dumb-init
-apt-get install --no-install-recommends --yes dumb-init=1.2.5-2
+apt-get install --no-install-recommends --yes dumb-init=1.2.5-2 
 
 apt-get autoremove --yes
 apt-get clean --yes

@@ -9,7 +9,7 @@ node_modules
 # Generierte Dateien
 build
 .extras/dependency-check-report.html
-.extras/doc/projekthandfilm/html/*
+.extras/doc/projekthandbuch/html/*
 .extras/doc/folien/*.html
 .extras/doc/api/*
 .extras/doc/ReadMe.html

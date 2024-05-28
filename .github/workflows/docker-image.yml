@@ -44,10 +44,17 @@ jobs:
           npm --version
           npm ci --no-fund --no-audit
 
+      - name: Verify Directory Structure
+        run: |
+          echo "Überprüfen der Verzeichnisstruktur"
+          ls -la
+          ls -la film
+
       - name: Compile
         run: |
+          echo "Kompilieren der TypeScript-Dateien"
           npx tsc --version
-          npx tsc --project tsconfig.json
+          npx tsc --project film/tsconfig.json
 
       - name: Test, Codeanalyse, Security, Doku
         run: |

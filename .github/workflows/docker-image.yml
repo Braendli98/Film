@@ -12,58 +12,44 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    services:
-      postgres:
-        image: postgres:13
-        ports:
-          - 5432:5432
-        env:
-          POSTGRES_DB: film
-          POSTGRES_USER: film_user
-          POSTGRES_PASSWORD: password
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
     env:
-      DATABASE_HOST: localhost
-      DATABASE_PORT: 5432
-      DATABASE_USER: film_user
-      DATABASE_PASSWORD: password
-      DATABASE_NAME: film
+      DATABASE_FILE: film.sqlite
 
     steps:
-      - name: Checkout repository
+      - name: Repository auschecken
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
+      - name: Node.js einrichten
         uses: actions/setup-node@v2
         with:
           node-version: '20'
 
-      - name: Create .env file
+      - name: .env Datei erstellen
         run: |
-          echo "DATABASE_HOST=localhost" >> .env
-          echo "DATABASE_PORT=5432" >> .env
-          echo "DATABASE_USER=film_user" >> .env
-          echo "DATABASE_PASSWORD=password" >> .env
-          echo "DATABASE_NAME=film" >> .env
+          echo "DATABASE_FILE=film.sqlite" >> .env
 
-      - name: Install dependencies
+      - name: SQLite-Datenbank überprüfen
+        run: |
+          if sqlite3 film.sqlite "SELECT name FROM sqlite_master WHERE type='table';" > /dev/null; then
+            echo "SQLite-Datenbank ist gültig";
+          else
+            echo "Ungültige SQLite-Datenbank";
+            exit 1;
+          fi
+
+      - name: Abhängigkeiten installieren
         run: npm install
 
-      - name: Initialize database
+      - name: Datenbank initialisieren
         run: node initializeDatabase.js
 
-      - name: Build project
+      - name: Projekt bauen
         run: npm run build
 
-      - name: Run tests
+      - name: Tests ausführen
         run: npm test
 
-      - name: Build Docker image
+      - name: Docker-Image bauen
         run: docker build -t my-image-name .
 
       # Weitere Schritte wie das Pushen des Docker-Images oder das Deployment können hier hinzugefügt werden

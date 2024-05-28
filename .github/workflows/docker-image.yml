@@ -12,10 +12,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    services:
-      docker:
-        image: node:20.11.0-bookworm
-        options: --user root:root
+    container:
+      image: node:20.11.0-bookworm
+      options: --user root:root
 
     steps:
       - name: Checkout Repository
@@ -30,16 +29,16 @@ jobs:
         run: |
           echo "Initialisierung"
           rm -rf src __tests__ node_modules dist .extras/doc/api .extras/doc/folien/folien.html .extras/doc/projekthandbuch/html
-          git clone https://github.com/myAccount/myRepo -b main .
 
       - name: Install Dependencies
         run: |
           apt-get update --yes
-          apt-get install --no-install-recommends --yes --show-progress gcc=4:12.2.0-3 g++=4:12.2.0-3 make=4.3-4.1 python3.11-minimal=3.11.2-6 ca-certificates=20230311 curl=7.88.1-10+deb12u5 gnupg=2.2.40-1.1
+          apt-get install --no-install-recommends --yes --show-progress gcc g++ make python3.11-minimal ca-certificates curl gnupg
+          mkdir -p /etc/apt/keyrings
           curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-          echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
+          echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x bookworm main" | tee /etc/apt/sources.list.d/nodesource.list
           apt-get update
-          apt-get install nodejs --no-install-recommends --yes --show-progress
+          apt-get install --no-install-recommends --yes --show-progress nodejs
           node --version
           npm i -g npm
           npm --version
@@ -63,18 +62,20 @@ jobs:
           npx typedoc --version
           npm run typedoc
 
-      - name: Publish HTML Reports
+      - name: Publish Projekthandbuch
         uses: actions/upload-artifact@v2
         with:
           name: Projekthandbuch
           path: .extras/doc/projekthandbuch/html/projekthandbuch.html
 
-      - uses: actions/upload-artifact@v2
+      - name: Publish Folien
+        uses: actions/upload-artifact@v2
         with:
           name: Folien (reveal.js)
           path: .extras/doc/folien/folien.html
 
-      - uses: actions/upload-artifact@v2
+      - name: Publish TypeDoc
+        uses: actions/upload-artifact@v2
         with:
           name: TypeDoc
           path: .extras/doc/api/index.html
@@ -86,6 +87,8 @@ jobs:
           fi
           zip -r film.zip dist
           echo "film.zip created"
+        
+      - name: Upload Zip
         uses: actions/upload-artifact@v2
         with:
           name: film.zip

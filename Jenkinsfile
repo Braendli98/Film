@@ -170,7 +170,7 @@ pipeline {
                             sh 'rm film.zip'
                         }
                     }
-                    zip zipFile: 'film.zip', dir: 'dist'
+                    zip archive: 'film.zip', dir: 'dist'
                     archiveArtifacts artifacts: 'film.zip', allowEmptyArchive: true
                 }
             }

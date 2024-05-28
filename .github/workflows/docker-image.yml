@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      DATABASE_FILE: film.sqlite
+      DATABASE_FILE: src/admin/config/dev/resources/db/sqlite/film.sqlite
 
     steps:
       - name: Repository auschecken
@@ -26,11 +26,11 @@ jobs:
 
       - name: .env Datei erstellen
         run: |
-          echo "DATABASE_FILE=film.sqlite" >> .env
+          echo "DATABASE_FILE=src/admin/config/dev/resources/db/sqlite/film.sqlite" >> .env
 
       - name: SQLite-Datenbank überprüfen
         run: |
-          if sqlite3 film.sqlite "SELECT name FROM sqlite_master WHERE type='table';" > /dev/null; then
+          if sqlite3 src/admin/config/dev/resources/db/sqlite/film.sqlite "SELECT name FROM sqlite_master WHERE type='table';" > /dev/null; then
             echo "SQLite-Datenbank ist gültig";
           else
             echo "Ungültige SQLite-Datenbank";
@@ -41,7 +41,7 @@ jobs:
         run: npm install
 
       - name: Datenbank initialisieren
-        run: node initializeDatabase.js
+        run: node ./initializeDatabase.js
 
       - name: Projekt bauen
         run: npm run build

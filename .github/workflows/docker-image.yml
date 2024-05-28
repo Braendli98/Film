@@ -34,6 +34,7 @@ jobs:
         run: |
           apt-get update --yes
           apt-get install --no-install-recommends --yes --show-progress gcc g++ make python3.11-minimal ca-certificates curl gnupg
+          mkdir -p /etc/apt/keyrings
           curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
           echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x bookworm main" | tee /etc/apt/sources.list.d/nodesource.list
           apt-get update
@@ -46,7 +47,7 @@ jobs:
       - name: Compile
         run: |
           npx tsc --version
-          ./node_modules/.bin/tsc
+          npx tsc --project film/tsconfig.json
 
       - name: Test, Codeanalyse, Security, Doku
         run: |

@@ -54,7 +54,7 @@ jobs:
         run: |
           echo "Kompilieren der TypeScript-Dateien"
           npx tsc --version
-          npx tsc --project film/tsconfig.json
+          npx tsc --project tsconfig.json
 
       - name: Test, Codeanalyse, Security, Doku
         run: |

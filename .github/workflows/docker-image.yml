@@ -1,4 +1,4 @@
-name: CI
+name: CI Pipeline
 
 on:
   push:
@@ -12,44 +12,97 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    env:
-      DATABASE_FILE: src/admin/config/dev/resources/db/sqlite/film.sqlite
-
     steps:
-      - name: Repository auschecken
+      - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Node.js einrichten
+      - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '20'
 
-      - name: .env Datei erstellen
+      - name: Clean Workspace
         run: |
-          echo "DATABASE_FILE=src/admin/config/dev/resources/db/sqlite/film.sqlite" >> .env
+          rm -rf src __tests__ node_modules dist .extras/doc/api .extras/doc/folien/folien.html .extras/doc/projekthandbuch/html
 
-      - name: SQLite-Datenbank überprüfen
+      - name: Install Dependencies
         run: |
-          if sqlite3 src/admin/config/dev/resources/db/sqlite/film.sqlite "SELECT name FROM sqlite_master WHERE type='table';" > /dev/null; then
-            echo "SQLite-Datenbank ist gültig";
-          else
-            echo "Ungültige SQLite-Datenbank";
-            exit 1;
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends --yes gcc=4:12.2.0-3 g++=4:12.2.0-3 make=4.3-4.1 python3.11-minimal=3.11.2-6
+          sudo apt-get install --no-install-recommends --yes ca-certificates curl gnupg
+          mkdir -p /etc/apt/keyrings
+          curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+          echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends --yes nodejs
+          node --version
+          npm i -g npm
+          npm --version
+          npm ci --no-fund --no-audit
+
+      - name: Compile Project
+        run: |
+          npx tsc --version
+          npx tsc
+
+      - name: Run Tests and Analysis
+        run: |
+          echo "TODO: Configure database server for tests"
+          # Uncomment the next line when the test command is ready
+          # npm run test:coverage
+
+          npx eslint --version
+          npm run eslint
+
+          npm audit --omit=dev
+
+          npx asciidoctor --version
+          npm run asciidoctor
+
+          npx asciidoctor-revealjs --version
+          npm run revealjs
+
+          npx typedoc --version
+          npm run typedoc
+
+      - name: Publish Reports
+        if: always()
+        run: |
+          echo "TODO: Links for Coverage and TypeDoc"
+          # Example for publishing HTML reports
+          # Uses actions/upload-artifact@v2 to upload report files as artifacts
+          mkdir -p .extras/doc/projekthandbuch/html .extras/doc/folien .extras/doc/api
+          # Move your reports to the appropriate directories if not already there
+          # e.g., mv some_report.html .extras/doc/projekthandbuch/html/projekthandbuch.html
+          # e.g., mv some_other_report.html .extras/doc/folien/folien.html
+          # e.g., mv api_report.html .extras/doc/api/index.html
+
+          # Publish Projekthandbuch
+          - name: Upload Projekthandbuch Report
+            uses: actions/upload-artifact@v2
+            with:
+              name: Projekthandbuch
+              path: .extras/doc/projekthandbuch/html/projekthandbuch.html
+
+          # Publish Folien
+          - name: Upload Folien Report
+            uses: actions/upload-artifact@v2
+            with:
+              name: Folien
+              path: .extras/doc/folien/folien.html
+
+          # Publish TypeDoc
+          - name: Upload TypeDoc Report
+            uses: actions/upload-artifact@v2
+            with:
+              name: TypeDoc
+              path: .extras/doc/api/index.html
+
+      - name: Archive Project
+        if: success()
+        run: |
+          if [ -f film.zip ]; then
+            rm film.zip
           fi
-
-      - name: Abhängigkeiten installieren
-        run: npm install
-
-      - name: Datenbank initialisieren
-        run: node ./initializeDatabase.js
-
-      - name: Projekt bauen
-        run: npm run build
-
-      - name: Tests ausführen
-        run: npm test
-
-      - name: Docker-Image bauen
-        run: docker build -t my-image-name .
-
-      # Weitere Schritte wie das Pushen des Docker-Images oder das Deployment können hier hinzugefügt werden
+          zip -r film.zip dist
+          e

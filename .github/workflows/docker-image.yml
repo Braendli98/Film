@@ -63,18 +63,20 @@ jobs:
           npx typedoc --version
           npm run typedoc
 
-      - name: Publish HTML Reports
+      - name: Publish Projekthandbuch
         uses: actions/upload-artifact@v2
         with:
           name: Projekthandbuch
           path: .extras/doc/projekthandbuch/html/projekthandbuch.html
 
-      - uses: actions/upload-artifact@v2
+      - name: Publish Folien
+        uses: actions/upload-artifact@v2
         with:
           name: Folien (reveal.js)
           path: .extras/doc/folien/folien.html
 
-      - uses: actions/upload-artifact@v2
+      - name: Publish TypeDoc
+        uses: actions/upload-artifact@v2
         with:
           name: TypeDoc
           path: .extras/doc/api/index.html
@@ -86,6 +88,8 @@ jobs:
           fi
           zip -r film.zip dist
           echo "film.zip created"
+        
+      - name: Upload Zip
         uses: actions/upload-artifact@v2
         with:
           name: film.zip

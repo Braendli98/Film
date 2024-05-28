@@ -33,11 +33,11 @@ jobs:
       - name: Install Dependencies
         run: |
           apt-get update --yes
-          apt-get install --no-install-recommends --yes --show-progress gcc=4:12.2.0-3 g++=4:12.2.0-3 make=4.3-4.1 python3.11-minimal=3.11.2-6 ca-certificates=20230311 curl=7.88.1-10+deb12u5 gnupg=2.2.40-1.1
-          curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-          echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x bookworm main" | tee /etc/apt/sources.list.d/nodesource.list
+          apt-get install --no-install-recommends --yes --show-progress gcc g++ make python3.11-minimal ca-certificates curl gnupg
+          curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /usr/share/keyrings/nodesource.gpg
+          echo "deb [signed-by=/usr/share/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x bookworm main" | tee /etc/apt/sources.list.d/nodesource.list
           apt-get update
-          apt-get install nodejs --no-install-recommends --yes --show-progress
+          apt-get install --no-install-recommends --yes --show-progress nodejs
           node --version
           npm i -g npm
           npm --version

@@ -35,5 +35,67 @@ jobs:
           apt-get update --yes
           apt-get install --no-install-recommends --yes --show-progress gcc=4:12.2.0-3 g++=4:12.2.0-3 make=4.3-4.1 python3.11-minimal=3.11.2-6 ca-certificates=20230311 curl=7.88.1-10+deb12u5 gnupg=2.2.40-1.1
           curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-          echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
-          apt-
+          echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x bookworm main" | tee /etc/apt/sources.list.d/nodesource.list
+          apt-get update
+          apt-get install nodejs --no-install-recommends --yes --show-progress
+          node --version
+          npm i -g npm
+          npm --version
+          npm ci --no-fund --no-audit
+
+      - name: Compile
+        run: |
+          npx tsc --version
+          ./node_modules/.bin/tsc
+
+      - name: Test, Codeanalyse, Security, Doku
+        run: |
+          echo "TODO: Rechnername/IP-Adresse des DB-Servers für Tests konfigurieren"
+          npx eslint --version
+          npm run eslint
+          npm audit --omit=dev
+          npx asciidoctor --version
+          npm run asciidoctor
+          npx asciidoctor-revealjs --version
+          npm run revealjs
+          npx typedoc --version
+          npm run typedoc
+
+      - name: Publish Projekthandbuch
+        uses: actions/upload-artifact@v2
+        with:
+          name: Projekthandbuch
+          path: .extras/doc/projekthandbuch/html/projekthandbuch.html
+
+      - name: Publish Folien
+        uses: actions/upload-artifact@v2
+        with:
+          name: Folien (reveal.js)
+          path: .extras/doc/folien/folien.html
+
+      - name: Publish TypeDoc
+        uses: actions/upload-artifact@v2
+        with:
+          name: TypeDoc
+          path: .extras/doc/api/index.html
+
+      - name: Create Zip
+        run: |
+          if [ -f film.zip ]; then
+            rm film.zip
+          fi
+          zip -r film.zip dist
+          echo "film.zip created"
+        
+      - name: Upload Zip
+        uses: actions/upload-artifact@v2
+        with:
+          name: film.zip
+          path: film.zip
+
+      - name: Docker Image bauen und veröffentlichen
+        run: |
+          echo "Docker-Image bauen und veröffentlichen"
+          docker buildx build --tag juergenzimmermann/film:2024.04.0 .
+          echo "Docker-Image gebaut"
+          # TODO: Docker-Image veröffentlichen (z.B. Docker Hub oder ein privates Registry)

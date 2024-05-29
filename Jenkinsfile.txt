@@ -87,7 +87,7 @@ pipeline {
                     },
                     'reveal.js': {
                         sh 'npx asciidoctor-revealjs --version'
-                        sh 'npm run revealjs'
+                        sh 'npm run reveal.js'
                     },
                     'TypeDoc': {
                         sh 'npx typedoc --version'

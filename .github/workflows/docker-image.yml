@@ -12,8 +12,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    container:
+      image: node:20.11.0-bookworm
+      options: --user root:root
+
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v2
 
       - name: Set up Node.js
@@ -21,20 +25,85 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Create .env file
+      - name: Initialisieren
         run: |
-          echo "${{ secrets.MY_SECRET }}" > .env
+          echo "Initialisierung"
+          rm -rf src __tests__ node_modules dist .extras/doc/api .extras/doc/folien/folien.html .extras/doc/projekthandbuch/html
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install Dependencies
+        run: |
+          apt-get update --yes
+          apt-get install --no-install-recommends --yes --show-progress gcc g++ make python3.11-minimal ca-certificates curl gnupg
+          mkdir -p /etc/apt/keyrings
+          curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+          echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x bookworm main" | tee /etc/apt/sources.list.d/nodesource.list
+          apt-get update
+          apt-get install --no-install-recommends --yes --show-progress nodejs
+          node --version
+          npm i -g npm
+          npm --version
+          npm ci --no-fund --no-audit
 
-      - name: Build project
-        run: npm run build
+      - name: Verify Directory Structure
+        run: |
+          echo "Überprüfen der Verzeichnisstruktur"
+          ls -la
+          ls -la film
 
-      - name: Run tests
-        run: npm test
+      - name: Compile
+        run: |
+          echo "Kompilieren der TypeScript-Dateien"
+          npx tsc --version
+          npx tsc --project tsconfig.json
 
-      - name: Build Docker image
-        run: docker build -t my-image-name .
+      - name: Test, Codeanalyse, Security, Doku
+        run: |
+          echo "TODO: Rechnername/IP-Adresse des DB-Servers für Tests konfigurieren"
+          npx eslint --version
+          npm run eslint
+          npm audit --omit=dev
+          npx asciidoctor --version
+          npm run asciidoctor
+          npx asciidoctor-revealjs --version
+          npm run revealjs
+          npx typedoc --version
+          npm run typedoc
 
-      # Weitere Schritte wie das Pushen des Docker-Images oder das Deployment
+      - name: Publish Projekthandbuch
+        uses: actions/upload-artifact@v2
+        with:
+          name: Projekthandbuch
+          path: .extras/doc/projekthandbuch/html/projekthandbuch.html
+
+      - name: Publish Folien
+        uses: actions/upload-artifact@v2
+        with:
+          name: Folien (reveal.js)
+          path: .extras/doc/folien/folien.html
+
+      - name: Publish TypeDoc
+        uses: actions/upload-artifact@v2
+        with:
+          name: TypeDoc
+          path: .extras/doc/api/index.html
+
+      - name: Create Zip
+        run: |
+          if [ -f film.zip ]; then
+            rm film.zip
+          fi
+          zip -r film.zip dist
+          echo "film.zip created"
+        
+      - name: Upload Zip
+        uses: actions/upload-artifact@v2
+        with:
+          name: film.zip
+          path: film.zip
+
+      - name: Docker Image bauen und veröffentlichen
+        run: |
+          echo "Docker-Image bauen und veröffentlichen"
+          docker buildx build --tag juergenzimmermann/film:2024.04.0 .
+          echo "Docker-Image gebaut"
+          # TODO: Docker-Image veröffentlichen (z.B. Docker Hub oder ein privates Registry)

@@ -6,7 +6,6 @@
 
 = Beispiel mit Nest, REST, GraphQL, TypeORM, JWT und Jest
 
-
 == Gliederung
 
 * Werkzeuge

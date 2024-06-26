@@ -1,3 +1,6 @@
+#!groove
+// https://www.jenkins.io/doc/tutorials/create-a-pipeline-in-blue-ocean/
+
 pipeline {
     agent {
         docker {
@@ -137,7 +140,7 @@ pipeline {
         stage('Docker Image bauen') {
             steps {
                 echo 'TODO: Docker-Image bauen und veroeffentlichen'
-                // sh 'docker buildx build --tag gruppe8/film:2024.04.0 .'
+                // sh 'docker buildx build --tag juergenzimmermann/film:2024.04.0 .'
             }
         }
         

@@ -4,7 +4,7 @@
 services:
   trivy:
     image: aquasec/trivy:0.50.1
-    command: [image, juergenzimmermann/film:2024.04.0-bookworm]
+    command: [image, gruppe_8/film:2024.04.0-bookworm]
     volumes:
       - type: bind
         source: C:/Zimmermann/volumes/trivy

@@ -39,6 +39,6 @@ entity "Filmplakt" {
 Film ||..|| Titel
 Film ||..o{ Abbildung
 
-footer (c) Pascal Brändli
+footer (c)  Gruppe 8
 
 @enduml

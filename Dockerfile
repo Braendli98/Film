@@ -97,7 +97,7 @@ LABEL org.opencontainers.image.title="film" \
     org.opencontainers.image.description="Appserver buch mit Basis-Image Debian Bookworm" \
     org.opencontainers.image.version="2024.04.0-bookworm" \
     org.opencontainers.image.licenses="GPL-3.0-or-later" \
-    org.opencontainers.image.authors="Juergen.Zimmermann@h-ka.de"
+    org.opencontainers.image.authors="Gruppe_8"
 
 RUN <<EOF
 set -eux

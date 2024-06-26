@@ -12,6 +12,6 @@ Gast -> FilmGetController : GET / getById()
 FilmGetController -> FilmReadService: findById()
 FilmReadService -> film: [TypeORM]
 
-footer (c) Pascal Brändli
+footer (c) Gruppe_8
 
 @enduml

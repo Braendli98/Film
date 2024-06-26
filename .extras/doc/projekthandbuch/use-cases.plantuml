@@ -17,6 +17,6 @@ rectangle film {
     Kunde --> (Film ändern)
 }
 
-footer (c) Pascal Brändli
+footer (c) Gruppe_8
 
 @enduml

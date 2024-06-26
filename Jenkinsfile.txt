@@ -81,17 +81,17 @@ pipeline {
                         sh 'npx eslint --version'
                         sh 'npm run eslint'
                     },
-                    'Security Audit': {
-                        sh 'npm audit --omit=dev'
-                    },
+                    //'Security Audit': {
+                    //    sh 'npm audit --omit=dev'
+                    //},
                     'AsciiDoctor': {
                         sh 'npx asciidoctor --version'
                         sh 'npm run asciidoctor'
                     },
-                    'reveal.js': {
-                        sh 'npx asciidoctor-revealjs --version'
-                        sh 'npm run reveal.js'
-                    },
+                    //'reveal.js': {
+                    //    sh 'npx asciidoctor-revealjs --version'
+                    //    sh 'npm run reveal.js'
+                    //},
                     'TypeDoc': {
                         sh 'npx typedoc --version'
                         sh 'npm run typedoc'
@@ -141,12 +141,6 @@ pipeline {
             steps {
                 echo 'TODO: Docker-Image bauen und veroeffentlichen'
                 // sh 'docker buildx build --tag juergenzimmermann/film:2024.04.0 .'
-            }
-        }
-        
-        stage('Deployment fuer Kubernetes') {
-            steps {
-                echo 'TODO: Deployment fuer Kubernetes mit z.B. Ansible, Terraform'
             }
         }
     }

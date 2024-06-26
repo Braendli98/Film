@@ -631,7 +631,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation {\r\n  create(\r\n    input: {\r\n       bewertung: 1,\r\n      genre: Action,\r\n      preis: 99.99,\r\n         datum: \"2022-01-31\",\r\n       titel: {\r\n        titel: \"Titelcreatemutation\",\r\n        beschreibung: \"beschreibungcreatemutation\"\r\n      },\r\n      filmplakat: [{\r\n        beschriftung: \"Abb. 1\",\r\n        contentType: \"img/png\"\r\n      }]\r\n    }\r\n  ) {\r\n      id\r\n  }\r\n}",
+								"query": "mutation {\r\n  create(\r\n    input: {\r\n       bewertung: 1,\r\n      genre: Action,\r\n      preis: 99.99,\r\n         datum: \"2022-01-31\",\r\n       titel: {\r\n        titel: \"Titelcreatemutation\",\r\n        beschreibung: \"beschreibungcreatemutation\"\r\n      },\r\n      filmplakate: [{\r\n        beschriftung: \"Abb. 1\",\r\n        contentType: \"img/png\"\r\n      }]\r\n    }\r\n  ) {\r\n      id\r\n  }\r\n}",
 								"variables": ""
 							}
 						},
